@@ -73,16 +73,6 @@ public class Customers implements Initializable {
 
     String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
 
-    //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
-
-
-//    public void addCustomer(ActionEvent event) {
-//        try {
-//            statement.execute(insertStatement);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 public void addCustomer(ActionEvent event) throws IOException {
     Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddCustomers.fxml"));
     Scene projectScene = new Scene(projectParent);
@@ -99,11 +89,17 @@ public void addCustomer(ActionEvent event) throws IOException {
     }
 
     public void deleteCustomer(ActionEvent event) {
+        int selectedCustomer = customersTable.getSelectionModel().getSelectedItems().get(0).getCustomerID();
+
+        String deleteSelected = "DELETE FROM customers WHERE customerId = " + selectedCustomer + ";";
+        //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
+
         try {
-            statement.execute(deleteAll);
+            statement.execute(deleteSelected);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        customersTable.refresh();
     }
 
     public void goToUpdateCustomer(ActionEvent event) throws IOException {
@@ -127,9 +123,6 @@ public void addCustomer(ActionEvent event) throws IOException {
         window.show();
     }
 
-    public void saveCustomer(ActionEvent event) {
-    }
-
     public void goToCustomer(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -148,15 +141,119 @@ public void addCustomer(ActionEvent event) throws IOException {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //sort TableViews
-        customersTable.getSortOrder().setAll();
+        Connection conn = LogIn.conn;
+        try {
+            DBQuery.setStatement(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Statement statement = DBQuery.getStatement();
 
+        // Update statement
+        String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
+
+        try {
+            statement.execute(updateStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // confirm rows affected
+        try {
+            if (statement.getUpdateCount() > 0) {
+                System.out.println(statement.getUpdateCount() + " rows affected.");
+            } else {
+                System.out.println("No change.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int thisInt = 5;
+        String search = "SELECT FROM country WHERE customerId = " + thisInt + "";
+        ResultSet results = null;
+        try {
+            results = statement.executeQuery("SELECT * FROM customers");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+// For each row of the result set ...
+
+        while (true) {
+            try {
+                if (!results.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+            int customerId = 0;
+            try {
+                customerId = Integer.parseInt(results.getString("customerId"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            String customerName = null;
+            try {
+                customerName = results.getString("customerName");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            int addressID = 0;
+            try {
+                addressID = Integer.parseInt(results.getString("addressID"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Boolean active = null;
+            try {
+                active = Boolean.valueOf(results.getString("active"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Date createDate = null;
+            try {
+                createDate = Date.valueOf(results.getString("createDate"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            String createdBy = null;
+            try {
+                createdBy = results.getString("createdBy");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Timestamp lastUpdate = null;
+            try {
+                lastUpdate = Timestamp.valueOf(results.getString("lastUpdate"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            String lastUpdateBy = null;
+            try {
+                lastUpdateBy = results.getString("lastUpdateBy");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Customer customer = new Customer(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
+            Customers.addNewCustomer(customer);
+            // Get the countryId from the current row using the column name - column countryId are in the VARCHAR format
+
+//            customerName = results.getString("customerId");
+
+
+
+        }
+        customersTable.getSortOrder().setAll();
         //set up initial values in table
         customersTable.setItems(getAllCustomers());
 
         //Setup PartTable
         customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        addressID.setCellValueFactory(new PropertyValueFactory<>("addressId"));
+        addressID.setCellValueFactory(new PropertyValueFactory<>("addressID"));
         active.setCellValueFactory(new PropertyValueFactory<>("active"));
         createdDateCol.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
         createdByCol.setCellValueFactory(new PropertyValueFactory<>("createdBy"));

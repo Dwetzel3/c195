@@ -14,7 +14,7 @@ import java.sql.*;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
         primaryStage.setTitle("Log In");
         primaryStage.setScene(new Scene(root, 600, 400));
@@ -65,47 +65,130 @@ public class Main extends Application {
         } else {
             System.out.println("No change.");
         }
-//        Customer customer1 = new Customer(1, "Danwell", 10, true, null, "admin",null,"admin");
-//        Customers.addNewCustomer(customer1);
+
+        try {
+            DBQuery.setStatement(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            statement.execute(updateStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // confirm rows affected
+        try {
+            if (statement.getUpdateCount() > 0) {
+                System.out.println(statement.getUpdateCount() + " rows affected.");
+            } else {
+                System.out.println("No change.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int thisInt = 5;
         String search = "SELECT FROM country WHERE customerId = " + thisInt + "";
-//        statement.execute(search);
-//        Customer danyo = new Customer(1, "Danwell", 10, true, null, "admin", null, "admin");
-//        Customer Charlie = new Customer(2, "Charlie", 10, true, null, "admin", null, "admin");
-//        Customer juju = new Customer(3, "Juju", 10, true, null, "admin", null, "admin");
-
-        ResultSet results = statement.executeQuery("SELECT * FROM customers");
+        ResultSet results = null;
+        try {
+            results = statement.executeQuery("SELECT * FROM customers");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
 // For each row of the result set ...
 
-        while (results.next()) {
-
-
-            int customerId = Integer.parseInt(results.getString("customerId"));
-            String customerName = results.getString("customerName");
-            int addressID = Integer.parseInt(results.getString("addressID"));
-            Boolean active = Boolean.valueOf(results.getString("active"));
-            Date createDate = Date.valueOf(results.getString("createDate"));
-            String createdBy = results.getString("createdBy");
-            Timestamp lastUpdate = Timestamp.valueOf(results.getString("lastUpdate"));
-            String lastUpdateBy = results.getString("lastUpdateBy");
-
-            Customer customer = new Customer(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
-            Customers.addNewCustomer(customer);
+//        while (true) {
+//            try {
+//                if (!results.next()) break;
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            int customerId = 0;
+//            try {
+//                customerId = Integer.parseInt(results.getString("customerId"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            String customerName = null;
+//            try {
+//                customerName = results.getString("customerName");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            int addressID = 0;
+//            try {
+//                addressID = Integer.parseInt(results.getString("addressID"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            Boolean active = null;
+//            try {
+//                active = Boolean.valueOf(results.getString("active"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            Date createDate = null;
+//            try {
+//                createDate = Date.valueOf(results.getString("createDate"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            String createdBy = null;
+//            try {
+//                createdBy = results.getString("createdBy");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            Timestamp lastUpdate = null;
+//            try {
+//                lastUpdate = Timestamp.valueOf(results.getString("lastUpdate"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            String lastUpdateBy = null;
+//            try {
+//                lastUpdateBy = results.getString("lastUpdateBy");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//
+//            Customer customer = new Customer(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
+//            Customers.addNewCustomer(customer);
             // Get the countryId from the current row using the column name - column countryId are in the VARCHAR format
 
 //            customerName = results.getString("customerId");
+//        ResultSet results = statement.executeQuery("SELECT * FROM customers");
+//
+//// For each row of the result set ...
+//
+//        while (results.next()) {
+//
+//
+//            int customerId = Integer.parseInt(results.getString("customerId"));
+//            String customerName = results.getString("customerName");
+//            int addressID = Integer.parseInt(results.getString("addressID"));
+//            Boolean active = Boolean.valueOf(results.getString("active"));
+//            Date createDate = Date.valueOf(results.getString("createDate"));
+//            String createdBy = results.getString("createdBy");
+//            Timestamp lastUpdate = Timestamp.valueOf(results.getString("lastUpdate"));
+//            String lastUpdateBy = results.getString("lastUpdateBy");
+//
+//            Customer customer = new Customer(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
+//            Customers.addNewCustomer(customer);
+//            // Get the countryId from the current row using the column name - column countryId are in the VARCHAR format
+//
+////            customerName = results.getString("customerId");
+//
+//
+//
+//        }
 
-
-
+            launch(args);
+            LogIn.closedConnection();
         }
-
-        for (int i = 0; i < 2; i++) {
-            System.out.println();
-        }
-
-        launch(args);
-        LogIn.closedConnection();
     }
-}

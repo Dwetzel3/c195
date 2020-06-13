@@ -2,6 +2,7 @@ package Controller;
 
 import DBConnection.DBQuery;
 import Model.Customer;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,7 +68,7 @@ public class AddCustomers implements Initializable {
     private TextField addressIdField;
 
     @FXML
-    private ChoiceBox<String> activeCB;
+    private ChoiceBox<Integer> activeCB;
 
     @FXML
     private HBox createdDateField;
@@ -85,16 +86,6 @@ public class AddCustomers implements Initializable {
 
     String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
 
-    //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
-
-
-    //    public void addCustomer(ActionEvent event) {
-//        try {
-//            statement.execute(insertStatement);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
     public void addCustomer(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddCustomers.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -128,7 +119,7 @@ public class AddCustomers implements Initializable {
     public void saveCustomer(ActionEvent event) throws IOException, SQLException {
         String customerName = customerNameField.getText();
         String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
-        String active = "1";
+        String active = String.valueOf(activeCB.getValue());
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));;
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));;
@@ -146,6 +137,7 @@ public class AddCustomers implements Initializable {
                 ");";
 
         statement.execute(insertStatement);
+        System.out.println(active);
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
 
@@ -170,15 +162,13 @@ public class AddCustomers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList choiceBox = FXCollections.observableArrayList();
-        choiceBox.addAll("True", "False");
+        choiceBox.addAll(0, 1);
         activeCB.setItems(choiceBox);
-
-        customersTable.getSortOrder().setAll();
 
         //set up initial values in table
         customersTable.setItems(getAllCustomers());
 
-        //Setup PartTable
+        //Setup customer table
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressIDCol.setCellValueFactory(new PropertyValueFactory<>("addressId"));
