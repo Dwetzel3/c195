@@ -23,9 +23,18 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-
 public class Customers implements Initializable {
     private static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+
+    public static Customer getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public static void setSelectedCustomer(Customer selectedCustomer) {
+        Customers.selectedCustomer = selectedCustomer;
+    }
+
+    private static Customer selectedCustomer;
 
     @FXML
     private TableView<Customer> customersTable;
@@ -54,26 +63,11 @@ public class Customers implements Initializable {
     @FXML
     private TableColumn<Customer, String> lastUpdatedBy;
 
-    static String countryName = "Canada";
-    static String createDate = "2020-06-06 00:00:00";
-    static String createdBy = "admin";
-    static String lastUpdateBy = "admin";
-
-    static String insertStatement = "INSERT INTO customers(customerName, addressID, active, createdBy, lastUpdateBy)" +
-            "VALUES(" +
-            "'" + countryName + "'," +
-            "'" + createDate + "'," +
-            "'" + createdBy + "'," +
-            "'" + lastUpdateBy + "'" +
-            ");";
-
-    int countryId = 0;
-
     static Statement statement = DBQuery.getStatement();
 
     String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
 
-public void addCustomer(ActionEvent event) throws IOException {
+    public void addCustomer(ActionEvent event) throws IOException {
     Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddCustomers.fxml"));
     Scene projectScene = new Scene(projectParent);
 
@@ -89,20 +83,20 @@ public void addCustomer(ActionEvent event) throws IOException {
     }
 
     public void deleteCustomer(ActionEvent event) {
-        int selectedCustomer = customersTable.getSelectionModel().getSelectedItems().get(0).getCustomerID();
-
-        String deleteSelected = "DELETE FROM customers WHERE customerId = " + selectedCustomer + ";";
+        setSelectedCustomer(customersTable.getSelectionModel().getSelectedItem());
+        String deleteSelected = "DELETE FROM customers WHERE customerId = " + selectedCustomer.getCustomerID() + ";";
         //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
-
+        allCustomers.removeAll(selectedCustomer);
         try {
             statement.execute(deleteSelected);
+            customersTable.setItems(getAllCustomers());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        customersTable.refresh();
     }
 
     public void goToUpdateCustomer(ActionEvent event) throws IOException {
+        setSelectedCustomer(customersTable.getSelectionModel().getSelectedItem());
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/UpdateCustomer.fxml"));
         Scene projectScene = new Scene(projectParent);
 
@@ -112,6 +106,11 @@ public void addCustomer(ActionEvent event) throws IOException {
         window.setTitle("Update Customer");
         window.show();
     }
+
+    private void setCustomerToUpdate(Customer selectedItem) {
+        Customers.selectedCustomer = selectedCustomer;
+    }
+
     public void goToMain(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Calendar.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -137,115 +136,9 @@ public void addCustomer(ActionEvent event) throws IOException {
     public static ObservableList<Customer> getAllCustomers() {
         return allCustomers;
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //sort TableViews
-        Connection conn = LogIn.conn;
-        try {
-            DBQuery.setStatement(conn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        Statement statement = DBQuery.getStatement();
-
-        // Update statement
-        String updateStatement = "UPDATE country SET country = 'Japan' WHERE country = 'Canada'";
-
-        try {
-            statement.execute(updateStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // confirm rows affected
-        try {
-            if (statement.getUpdateCount() > 0) {
-                System.out.println(statement.getUpdateCount() + " rows affected.");
-            } else {
-                System.out.println("No change.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        int thisInt = 5;
-        String search = "SELECT FROM country WHERE customerId = " + thisInt + "";
-        ResultSet results = null;
-        try {
-            results = statement.executeQuery("SELECT * FROM customers");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-// For each row of the result set ...
-
-        while (true) {
-            try {
-                if (!results.next()) break;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-
-            int customerId = 0;
-            try {
-                customerId = Integer.parseInt(results.getString("customerId"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            String customerName = null;
-            try {
-                customerName = results.getString("customerName");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            int addressID = 0;
-            try {
-                addressID = Integer.parseInt(results.getString("addressID"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            Boolean active = null;
-            try {
-                active = Boolean.valueOf(results.getString("active"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            Date createDate = null;
-            try {
-                createDate = Date.valueOf(results.getString("createDate"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            String createdBy = null;
-            try {
-                createdBy = results.getString("createdBy");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            Timestamp lastUpdate = null;
-            try {
-                lastUpdate = Timestamp.valueOf(results.getString("lastUpdate"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            String lastUpdateBy = null;
-            try {
-                lastUpdateBy = results.getString("lastUpdateBy");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            Customer customer = new Customer(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy);
-            Customers.addNewCustomer(customer);
-            // Get the countryId from the current row using the column name - column countryId are in the VARCHAR format
-
-//            customerName = results.getString("customerId");
-
-
-
-        }
         customersTable.getSortOrder().setAll();
         //set up initial values in table
         customersTable.setItems(getAllCustomers());
@@ -260,4 +153,6 @@ public void addCustomer(ActionEvent event) throws IOException {
         lastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         lastUpdatedBy.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
     }
+
+
 }

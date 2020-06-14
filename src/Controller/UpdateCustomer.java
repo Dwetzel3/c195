@@ -2,7 +2,6 @@ package Controller;
 
 import DBConnection.DBQuery;
 import Model.Customer;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,14 +21,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 import static Controller.Customers.getAllCustomers;
-import static javafx.collections.FXCollections.*;
+import static Controller.Customers.statement;
 
-public class AddCustomers implements Initializable {
 
+public class UpdateCustomer implements Initializable {
+    public static Customer selectedCustomer;
     @FXML
     private TableView<Customer> customersTable;
 
@@ -59,7 +62,7 @@ public class AddCustomers implements Initializable {
 
 
     @FXML
-    private TextField customerIdField;
+    private TextField customerIdField ;
 
     @FXML
     private TextField customerNameField;
@@ -81,76 +84,6 @@ public class AddCustomers implements Initializable {
 
     @FXML
     private TextField lastUpdatedByField;
-
-    @FXML private int customerID = getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1;
-
-    Statement statement = DBQuery.getStatement();
-
-    String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
-
-    public void addCustomer(ActionEvent event) throws IOException {
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddCustomers.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Add Customer");
-        window.show();
-    }
-
-    public void deleteCustomer(ActionEvent event) {
-        try {
-            statement.execute(deleteAll);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void goToUpdateCustomer(ActionEvent event) throws IOException {
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/UpdateCustomer.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Update Customer");
-        window.show();
-    }
-
-    public void saveCustomer(ActionEvent event) throws IOException, SQLException {
-        String customerName = customerNameField.getText();
-        String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
-        String active = String.valueOf(activeCB.getValue());
-        String createDate = String.valueOf(new Date(System.currentTimeMillis()));;
-        String createdBy = LogIn.getUsername();
-        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));;
-        String lastUpdateBy = lastUpdatedByField.getText();
-
-        String insertStatement = "INSERT INTO customers(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-                "VALUES(" +
-                "'" + customerName + "'," +
-                "'" + addressID + "'," +
-                "'" + active + "'," +
-                "'" + createDate + "'," +
-                "'" + createdBy + "'," +
-                "'" + lastUpdate + "'," +
-                "'" + lastUpdateBy + "'" +
-                ");";
-        Customer customer = new Customer(customerID, customerName, Integer.parseInt(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
-        Customers.addNewCustomer(customer);
-        statement.execute(insertStatement);
-        System.out.println(activeCB.getValue());
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Customers");
-        window.show();
-    }
-
     public void goToCustomer(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -161,6 +94,37 @@ public class AddCustomers implements Initializable {
         window.setTitle("Customers");
         window.show();
     }
+    public void saveCustomer(ActionEvent event) throws IOException, SQLException {
+        String customerID = String.valueOf(selectedCustomer.getCustomerID());
+        String customerName = customerNameField.getText();
+        String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
+        String active = String.valueOf(activeCB.getValue());
+        String createDate = String.valueOf(new Date(System.currentTimeMillis()));;
+        String createdBy = LogIn.getUsername();
+        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));;
+        String lastUpdateBy = LogIn.getUsername();
+
+        String UpdateCustomer = "UPDATE customers SET customerName = '" + customerName + "'," +
+                "addressID = '" + addressID + "'," +
+                "active = '" + active + "'," +
+                "createDate = '" + createDate + "'," +
+                "createdBy = '" + createdBy + "'," +
+                "lastUpdate = '" + lastUpdate + "'," +
+                "lastUpdateBy = '" + lastUpdateBy + "'" +
+                " WHERE customerId = '" + customerID +
+                "';";
+
+        statement.execute(UpdateCustomer);
+            Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
+            Scene projectScene = new Scene(projectParent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(projectScene);
+            window.setTitle("Customers");
+            window.show();
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -168,7 +132,8 @@ public class AddCustomers implements Initializable {
         choiceBox.addAll(0, 1);
         activeCB.setItems(choiceBox);
 
-        customersTable.getSortOrder().setAll();
+        selectedCustomer = Customers.getSelectedCustomer();
+        customerIdField.setText(String.valueOf((selectedCustomer.getCustomerID())));
 
         //set up initial values in table
         customersTable.setItems(getAllCustomers());

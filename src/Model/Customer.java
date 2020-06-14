@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class Customer {
 
+    private static Customer selectedCustomer;
+
     private int customerID;
     private String customerName;
     private int addressID;
@@ -98,5 +100,12 @@ public class Customer {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+    public Customer getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public void setSelectedCustomer(Customer selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
     }
 }
