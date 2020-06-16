@@ -9,14 +9,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Calendar implements Initializable {
+    @FXML
+    private Label month;
+
+    private static LocalDate date = LocalDate.now();
 
     @FXML
     private ListView<String> day0List;
@@ -24,8 +32,14 @@ public class Calendar implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        month.setText(date.getMonth().toString());
         populateCal();
     }
+
+
+    @FXML
+    private DatePicker datePicker;
+
 
     private void populateCal() {
         list.removeAll();
@@ -37,6 +51,11 @@ public class Calendar implements Initializable {
         day0List.getItems().addAll(list);
     }
 
+    @FXML
+    void refreshDate(ActionEvent event) {
+        month.setText(String.valueOf(datePicker.getValue().getMonth()));
+
+    }
     public void goToCustomers(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);

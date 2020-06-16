@@ -17,7 +17,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Label text="Month">
+            <Label fx:id="month" text="Month">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -25,7 +25,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <DatePicker />
+            <DatePicker fx:id="datePicker" onAction="#refreshDate" />
             <HBox maxWidth="590.0" prefHeight="23.0" prefWidth="590.0">
                <children>
                   <Label alignment="CENTER" prefWidth="84.0" text="Sunday" textAlignment="JUSTIFY">

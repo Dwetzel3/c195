@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Appointment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,8 +13,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Appointments {
+
+    private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+
     public void goToAddAppointments(ActionEvent event) throws IOException {
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddAppointments.fxml"));
+        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddAppointment.fxml"));
         Scene projectScene = new Scene(projectParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -53,5 +59,19 @@ public class Appointments {
         window.setScene(projectScene);
         window.setTitle("Appointments");
         window.show();
+    }
+
+    public void GoToAddAppointments(ActionEvent event) throws IOException {
+        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddAppointment.fxml"));
+        Scene projectScene = new Scene(projectParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(projectScene);
+        window.setTitle("Appointments");
+        window.show();
+    }
+    public static void addNewAppointment(Appointment appointment) {
+        allAppointments.add(appointment);
     }
 }
