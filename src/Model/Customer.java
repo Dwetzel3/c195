@@ -32,8 +32,6 @@ public class Customer {
 
     public static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
-
-
     public static void setAllCustomers(ObservableList<Customer> allCustomers) {
         Customer.allCustomers = allCustomers;
     }

@@ -94,27 +94,28 @@
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                          <HBox prefHeight="100.0" prefWidth="84.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="163.0" fx:id="x1y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="day0List" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="listx1y1" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                        <children>
-                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                          <HBox prefHeight="100.0" prefWidth="353.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="26.0" fx:id="x2y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx2y1" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -123,11 +124,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label alignment="CENTER" prefWidth="26.0" fx:id="x3y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx3y1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -136,11 +138,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" fx:id="x4y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx4y1" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -149,11 +152,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" fx:id="x5y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx5y1" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -162,11 +166,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" fx:id="x6y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx6y1" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -175,11 +180,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" fx:id="x7y1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx7y1" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -188,11 +194,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="26.0" text="1" fx:id="x1y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx1y2" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -201,11 +208,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefHeight="27.0" prefWidth="26.0" text="1" fx:id="x2y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx2y2" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -214,11 +222,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x3y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx3y2" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -227,11 +236,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x4y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx4y2" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -240,11 +250,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x5y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx5y2" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -253,11 +264,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x6y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx6y2" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -266,11 +278,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x7y2">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx7y2" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -279,24 +292,26 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefHeight="27.0" prefWidth="26.0" text="1" fx:id="x1y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx1y3" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                          <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="NEVER">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x2y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx2y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -305,11 +320,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefHeight="27.0" prefWidth="26.0" text="1" fx:id="x1y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx1y4" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -318,11 +334,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x2y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx2y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -331,11 +348,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefHeight="27.0" prefWidth="26.0" text="1" fx:id="x1y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx1y5" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -344,11 +362,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x2y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx2y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -357,11 +376,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x3y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx3y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -370,11 +390,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x4y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx4y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -383,11 +404,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x5y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx5y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -396,11 +418,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x6y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx6y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -409,11 +432,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x7y3">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx7y3" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -422,11 +446,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x3y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx3y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -435,11 +460,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x4y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx4y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -448,11 +474,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x3y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx3y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -461,11 +488,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x4y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx4y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -474,11 +502,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x5y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx5y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -487,11 +516,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x5y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx5y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -500,11 +530,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x6y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx6y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -513,11 +544,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x7y4">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx7y4" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -526,11 +558,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x7y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx7y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -539,11 +572,12 @@
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="1">
+                                                <Label prefWidth="26.0" text="1" fx:id="x6y5">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listx6y5" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>

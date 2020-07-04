@@ -3,31 +3,31 @@ package Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.TimeZone;
 
 public class Appointment {
     private static Appointment selectedAppointment;
-
+    private int appointmentId;
     private int customerID;
     private int userID;
     private String title;
     private String description;
-    private TimeZone location;
+    private String location;
     private String contact;
     private String type;
     private String url;
-    private Timestamp start;
-    private Timestamp end;
+    private String start;
+    private String end;
     private Date createdDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
 
-    public Appointment(int customerID, int userID, String title, String description, TimeZone location, String contact, String type, String url, Timestamp start, Timestamp end,
+    public Appointment(int appointmentId, int customerID, int userID, String title, String description, String location, String contact, String type, String url, String start, String end,
                        Date createdDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
+        this.appointmentId = appointmentId;
         this.customerID = customerID;
         this.userID = userID;
         this.title = title;
@@ -78,11 +78,11 @@ public class Appointment {
         this.description = description;
     }
 
-    public TimeZone getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(TimeZone location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -110,19 +110,19 @@ public class Appointment {
         this.url = url;
     }
 
-    public Timestamp getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Timestamp start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Timestamp getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Timestamp end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
@@ -156,5 +156,13 @@ public class Appointment {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 }

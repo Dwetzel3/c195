@@ -85,7 +85,6 @@ public class Customers implements Initializable {
     public void deleteCustomer(ActionEvent event) {
         setSelectedCustomer(customersTable.getSelectionModel().getSelectedItem());
         String deleteSelected = "DELETE FROM customers WHERE customerId = " + selectedCustomer.getCustomerID() + ";";
-        //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
         allCustomers.removeAll(selectedCustomer);
         try {
             statement.execute(deleteSelected);

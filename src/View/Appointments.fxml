@@ -43,12 +43,17 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="UpdateAppointment" mnemonicParsing="false" prefWidth="75.0" text="Update">
+                        <Button fx:id="UpdateAppointment" mnemonicParsing="false" onAction="#goToUpdateAppointment" prefWidth="75.0" text="Update">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="DeleteAppointment" mnemonicParsing="false" prefWidth="75.0" text="Delete">
+                        <Button fx:id="DeleteAppointment" mnemonicParsing="false" onAction="#deleteAppointment" prefWidth="75.0" text="Delete">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#goToMain" prefWidth="75.0" text="Exit">
                            <font>
                               <Font size="14.0" />
                            </font>

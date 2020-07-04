@@ -5,16 +5,72 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Appointments">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="1161.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateAppointment">
    <children>
-      <VBox alignment="CENTER" prefHeight="447.0" prefWidth="800.0">
+      <VBox alignment="TOP_CENTER" layoutX="271.0" prefHeight="555.0" prefWidth="896.0">
          <children>
-            <Label text="Update Appointment">
+            <VBox prefHeight="153.0" prefWidth="856.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="856.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Start:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="StartField" prefHeight="25.0" prefWidth="118.0" />
+                        <Label prefHeight="27.0" prefWidth="144.0" text="End:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="EndField" prefHeight="25.0" prefWidth="118.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="489.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Created Date:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="CreatedField" editable="false" prefHeight="25.0" prefWidth="118.0" />
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Created By:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="CreatedByField" editable="false" prefHeight="25.0" prefWidth="118.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="489.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Last Update:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="LastUpdateField" editable="false" prefHeight="25.0" prefWidth="118.0" />
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Last Updated By:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="LastUpdatedByField" editable="false" prefHeight="25.0" prefWidth="118.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label text="Add Appointments">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -22,27 +78,28 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <TableView prefHeight="200.0" prefWidth="435.0">
+            <TableView fx:id="AppointmentsTable" prefHeight="264.0" prefWidth="856.0">
                <columns>
-                  <TableColumn prefWidth="122.0" text="Customer" />
-                  <TableColumn prefWidth="154.0" text="Type" />
+                  <TableColumn fx:id="CustomerCol" prefWidth="65.0" text="Customer" />
+                  <TableColumn fx:id="UserCol" prefWidth="36.0" text="User" />
+                  <TableColumn fx:id="TitleIdCol" prefWidth="114.0" text="Title" />
+                  <TableColumn fx:id="DescriptionCol" prefWidth="200.0" text="Description" />
+                  <TableColumn fx:id="StartCol" prefWidth="102.0" text="Start" />
+                  <TableColumn fx:id="EndCol" prefWidth="109.0" text="End" />
+                  <TableColumn fx:id="LastUpdatedCol" prefWidth="127.0" text="Last Updated" />
+                  <TableColumn fx:id="LastUpdatedByCol" prefWidth="102.0" text="Updated By" />
                </columns>
             </TableView>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="51.0" prefWidth="489.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="489.0" spacing="50.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="75.0" text="Add">
+                        <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#saveAppointment" prefWidth="75.0" text="Save">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefWidth="75.0" text="Update">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefWidth="75.0" text="Delete">
+                        <Button fx:id="DeleteBtn" mnemonicParsing="false" prefWidth="75.0" text="Delete">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -56,6 +113,97 @@
                   </HBox>
                </children>
             </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="447.0" prefWidth="290.0" spacing="20.0">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="250.0" spacing="20.0">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="116.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="144.0" text="Customer ID:">
+                           <font>
+                              <Font name="System Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="CustomerIdField" prefHeight="25.0" prefWidth="118.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="User ID:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="UserIdField" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Title:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="TitleField" prefHeight="25.0" prefWidth="125.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="46.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Description:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="DescriptionField" prefHeight="25.0" prefWidth="125.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="createdDateField" prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Location:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="LocationField" prefHeight="25.0" prefWidth="128.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Contact:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="ContactField" prefHeight="25.0" prefWidth="128.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Type:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="TypeField" prefHeight="25.0" prefWidth="128.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="URL:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="URLField" prefHeight="25.0" prefWidth="128.0" />
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
