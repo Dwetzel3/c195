@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -94,9 +95,6 @@ public class AddAppointment implements Initializable {
     private TextField DescriptionField;
 
     @FXML
-    private HBox createdDateField;
-
-    @FXML
     private TextField LocationField;
 
     @FXML
@@ -164,8 +162,10 @@ public class AddAppointment implements Initializable {
                 "'" + lastUpdateBy + "'" +
                 ");";
         Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description,location, contact, type, url, start, end, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+
         Appointments.addNewAppointment(appointment);
         statement.execute(insertStatement);
+
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
         Scene projectScene = new Scene(projectParent);
 
@@ -182,13 +182,11 @@ public class AddAppointment implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList startChoiceBox = FXCollections.observableArrayList();
-        startChoiceBox.addAll("00:00:00", "0200", "0300", "04", "0500", "0600", "0700", "0800", "0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"
-                                        , "1800", "1900", "2000", "2100", "2200", "2300", "2400");
+        startChoiceBox.addAll("05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
         startTime.setItems(startChoiceBox);
 
         ObservableList endChoiceBox = FXCollections.observableArrayList();
-        endChoiceBox.addAll("00:00:00", "0200", "0300", "0400", "05", "0600", "0700", "0800", "0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"
-                , "1800", "1900", "2000", "2100", "2200", "2300", "2400");
+        endChoiceBox.addAll("05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
         endTime.setItems(endChoiceBox);
     }
 }

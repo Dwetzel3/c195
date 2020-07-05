@@ -260,7 +260,7 @@ public class Calendar implements Initializable {
                 list.addAll(a);
                 if (sameYear && sameMonth) {
                     if (list.get(i).getStart() != null && String.valueOf(Appointments.getAllAppointments().get(i).getStart()).substring(6,7).equals(String.valueOf(currentMonth))) {
-                        if (Integer.valueOf(list.get(i).getStart().substring(8, 10)) == 1) {
+                        if (Integer.valueOf(list.get(i).getStart().toString().substring(8, 10)) == 1) {
                             if (Integer.valueOf(x1y1.getText()) == 1) {
                                 listx1y1.getItems().add(list.get(i).getTitle());
                             }
@@ -282,7 +282,7 @@ public class Calendar implements Initializable {
                                 listx7y1.getItems().addAll(list.get(i).getTitle());
                             }
                         }
-                        if (Integer.valueOf(list.get(i).getStart().substring(8, 10)) == 2) {
+                        if (Integer.valueOf(list.get(i).getStart().toString().substring(8, 10)) == 2) {
                             if (Integer.valueOf(x2y1.getText()) == 2) {
                                 listx2y1.getItems().addAll(list.get(i).getTitle());
                             }
@@ -305,7 +305,7 @@ public class Calendar implements Initializable {
                                 listx1y2.getItems().addAll(list.get(i).getTitle());
                             }
                         }
-                        if (Integer.valueOf(list.get(i).getStart().substring(8, 10)) == 3) {
+                        if (Integer.valueOf(list.get(i).getStart().toString().substring(8, 10)) == 3) {
                             if (Integer.valueOf(x3y1.getText()) == 3) {
                                 listx3y1.getItems().addAll(list.get(i).getTitle());
                             }

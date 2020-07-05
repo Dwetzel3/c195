@@ -59,6 +59,7 @@ public class Appointments implements Initializable {
         return selectedAppointment;
     }
     public static void updateAppointment(int userId, Appointment appointment) {
+        allAppointments.remove(selectedAppointment);
         allAppointments.set(userId, appointment);
     }
     private static Appointment selectedAppointment;
@@ -91,6 +92,7 @@ public class Appointments implements Initializable {
 
     public void deleteAppointment(ActionEvent event) {
         setSelectedAppointment(AppointmentsTable.getSelectionModel().getSelectedItem());
+        allAppointments = AppointmentsTable.getItems();
         String deleteSelected = "DELETE FROM appointments WHERE appointmentID = " + selectedAppointment.getAppointmentId() + ";";
         allAppointments.removeAll(selectedAppointment);
         try {
@@ -118,10 +120,8 @@ public class Appointments implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AppointmentsTable.getSortOrder().setAll();
-
         //set up initial values in table
         AppointmentsTable.setItems(getAllAppointments());
-
         //Setup customer table
         CustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         UserCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -131,9 +131,11 @@ public class Appointments implements Initializable {
         EndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         LastUpdatedCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         UpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
+
     }
 
     public static ObservableList<Appointment> getAllAppointments() {
         return allAppointments;
     }
+
 }

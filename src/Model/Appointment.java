@@ -4,8 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 
 public class Appointment {
     private static Appointment selectedAppointment;
@@ -18,8 +18,8 @@ public class Appointment {
     private String contact;
     private String type;
     private String url;
-    private String start;
-    private String end;
+    private String  start;
+    private String  end;
     private Date createdDate;
     private String createdBy;
     private Timestamp lastUpdate;
