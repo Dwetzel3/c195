@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -101,6 +102,12 @@ public class UpdateAppointment implements Initializable {
     }
 
     public void saveAppointment(ActionEvent event) throws IOException, SQLException {
+        java.util.Date date = Date.valueOf(assignedDate.getValue());
+        if (!TimeZone.getDefault().inDaylightTime(date)) {
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26)) - 1;
+        } else if (TimeZone.getDefault().inDaylightTime(date)){
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26));
+        }
         System.out.println(assignedDate.getValue().toString() + " " + (Integer.valueOf(startTimeCB.getValue().substring(0,2)) + AddAppointment.offset) + ":00:00");
 
         String appointmentId = String.valueOf(UserIdField.getText());
@@ -124,6 +131,7 @@ public class UpdateAppointment implements Initializable {
 
         String alterStatement = "UPDATE appointments " +
                 "SET userId = '" + userId + "'," +
+                "customerId = '" + customerId + "'," +
                 "description = '" + description + "'," +
                 "location = '" + location + "'," +
                 "contact = '" + contact + "'," +

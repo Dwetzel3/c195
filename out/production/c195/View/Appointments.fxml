@@ -26,11 +26,11 @@
                <columns>
                   <TableColumn fx:id="CustomerIdCol" prefWidth="63.0" text="Customer" />
                   <TableColumn fx:id="UserCol" prefWidth="45.0" text="User" />
-                  <TableColumn fx:id="TitleCol" prefWidth="94.0" text="Title" />
-                  <TableColumn fx:id="DescriptionCol" prefWidth="179.0" text="Description" />
-                  <TableColumn fx:id="StartCol" prefWidth="98.0" text="Start" />
-                  <TableColumn fx:id="EndCol" prefWidth="81.0" text="End" />
-                  <TableColumn fx:id="LastUpdatedCol" prefWidth="102.0" text="Last Updated" />
+                  <TableColumn fx:id="TitleCol" prefWidth="83.0" text="Title" />
+                  <TableColumn fx:id="DescriptionCol" prefWidth="110.0" text="Description" />
+                  <TableColumn fx:id="StartCol" prefWidth="133.0" text="Start" />
+                  <TableColumn fx:id="EndCol" prefWidth="125.0" text="End" />
+                  <TableColumn fx:id="LastUpdatedCol" prefWidth="103.0" text="Last Updated" />
                   <TableColumn fx:id="UpdatedByCol" prefWidth="111.0" text="Updated By" />
                </columns>
             </TableView>
