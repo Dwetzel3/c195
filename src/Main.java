@@ -1,3 +1,4 @@
+import Controller.AddAppointment;
 import Controller.Appointments;
 import Controller.Customers;
 import Controller.LogIn;
@@ -216,12 +217,14 @@ public class Main extends Application {
             String start = null;
             try {
                 start = appointmentResults.getString("start");
+                start = start.substring(0,10) + " " + (Integer.valueOf(start.substring(11,13)) + (Integer.valueOf(AddAppointment.offset))) + ":00:00";
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             String end = null;
             try {
                 end = appointmentResults.getString("end");
+                end = end.substring(0,10) + " " + (Integer.valueOf(end.substring(11,13)) + (Integer.valueOf(AddAppointment.offset))) + ":00:00";
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -253,15 +256,16 @@ public class Main extends Application {
 
 
         }
+        AddAppointment.convertTime();
             launch(args);
             LogIn.closedConnection();
-        System.out.println(Appointments.getAllAppointments());
 //        ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
 
 //        ZoneId.getAvailableZoneIds().stream().filter(c -> c.contains("Europe")).forEach(System.out::println);
 
         LocalDate parisDate = LocalDate.of(2019, 10, 26);
         LocalTime timeParis = LocalTime.of(01, 00);
+        System.out.println(Appointments.getAllAppointments().get(1).getStart());
         ZoneId parisZoneId = ZoneId.of("Europe/Paris");
         ZonedDateTime parisZDT = ZonedDateTime.of(parisDate, timeParis, parisZoneId);
         ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());

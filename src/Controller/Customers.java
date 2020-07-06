@@ -24,7 +24,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class Customers implements Initializable {
-    private static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+    private static final ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
     public static Customer getSelectedCustomer() {
         return selectedCustomer;

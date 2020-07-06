@@ -99,9 +99,9 @@ public class UpdateCustomer implements Initializable {
         String customerName = customerNameField.getText();
         String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
         String active = String.valueOf(activeCB.getValue());
-        String createDate = String.valueOf(new Date(System.currentTimeMillis()));;
+        String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
-        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));;
+        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
 
         String UpdateCustomer = "UPDATE customers SET customerName = '" + customerName + "'," +

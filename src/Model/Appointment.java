@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.AddAppointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

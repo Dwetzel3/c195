@@ -82,7 +82,7 @@ public class AddCustomers implements Initializable {
     @FXML
     private TextField lastUpdatedByField;
 
-    @FXML private int customerID = getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1;
+    @FXML private final int customerID = getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1;
 
     Statement statement = DBQuery.getStatement();
 
@@ -122,9 +122,9 @@ public class AddCustomers implements Initializable {
         String customerName = customerNameField.getText();
         String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
         String active = String.valueOf(activeCB.getValue());
-        String createDate = String.valueOf(new Date(System.currentTimeMillis()));;
+        String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
-        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));;
+        String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = lastUpdatedByField.getText();
 
         String insertStatement = "INSERT INTO customers(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +

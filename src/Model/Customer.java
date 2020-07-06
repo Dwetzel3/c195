@@ -104,6 +104,6 @@ public class Customer {
     }
 
     public void setSelectedCustomer(Customer selectedCustomer) {
-        this.selectedCustomer = selectedCustomer;
+        Customer.selectedCustomer = selectedCustomer;
     }
 }

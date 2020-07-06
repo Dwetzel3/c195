@@ -18,8 +18,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.*;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import static Controller.Customers.statement;
 
@@ -119,6 +122,12 @@ public class Appointments implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(ZonedDateTime.now().getOffset());
+//        int utc = Integer.parseInt(Appointments.getAllAppointments().get(1).getStart().substring(11,13));
+//        System.out.println(utc);
+//        allAppointments.get(1).setStart(allAppointments.get(1).getStart().substring(0,11) + utc + allAppointments.get(1).getStart().substring(13,21));
+        System.out.println(allAppointments.get(1).getStart());
+
         AppointmentsTable.getSortOrder().setAll();
         //set up initial values in table
         AppointmentsTable.setItems(getAllAppointments());

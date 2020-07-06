@@ -20,8 +20,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.*;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -126,6 +127,24 @@ public class AddAppointment implements Initializable {
         window.show();
     }
 
+    public static int offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26));
+
+    public static void convertTime() {
+        java.util.Date date = new java.util.Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        df.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
+        System.out.println("Date and time in Madrid: " + df.format(date));
+        if (true) {
+            System.out.println("Local: " + offset);
+
+            System.out.println("Date and time in Seattle: " + df.format(date));
+        }
+        else {
+            System.out.println("NOT!");
+        }
+    }
+
     public void saveAppointment(ActionEvent event) throws IOException, SQLException {
         System.out.println(assignedDate.getValue().toString() + " " + startTime.getValue() + ":00:00");
         String appointmentId = String.valueOf(0);
@@ -137,8 +156,10 @@ public class AddAppointment implements Initializable {
         String contact = ContactField.getText();
         String type = TypeField.getText();
         String url = URLField.getText();
-        String start = assignedDate.getValue().toString() + " " + startTime.getValue().toString() + ":00:00";
-        String end = assignedDate.getValue().toString() + " " + endTime.getValue().toString() + ":00:00";
+        String starts = assignedDate.getValue().toString() + " " + Integer.valueOf(startTime.getValue().substring(0,2)) + ":00:00";
+        String ends = assignedDate.getValue().toString() + " " + Integer.valueOf(endTime.getValue().substring(0,2)) + ":00:00";
+        String start = assignedDate.getValue().toString() + " " + (Integer.valueOf(startTime.getValue()) - offset) + ":00:00";
+        String end = assignedDate.getValue().toString() + " " + (Integer.valueOf(endTime.getValue()) - offset) + ":00:00";
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
@@ -161,7 +182,7 @@ public class AddAppointment implements Initializable {
                 "'" + lastUpdate + "'," +
                 "'" + lastUpdateBy + "'" +
                 ");";
-        Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description,location, contact, type, url, start, end, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+        Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description,location, contact, type, url, starts, ends, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
 
         Appointments.addNewAppointment(appointment);
         statement.execute(insertStatement);
@@ -182,11 +203,11 @@ public class AddAppointment implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList startChoiceBox = FXCollections.observableArrayList();
-        startChoiceBox.addAll("05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
+        startChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
         startTime.setItems(startChoiceBox);
 
         ObservableList endChoiceBox = FXCollections.observableArrayList();
-        endChoiceBox.addAll("05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18");
+        endChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
         endTime.setItems(endChoiceBox);
     }
 }
