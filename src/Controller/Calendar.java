@@ -10,14 +10,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.time.Year;
 import java.util.ResourceBundle;
@@ -25,7 +30,11 @@ import java.util.ResourceBundle;
 public class Calendar implements Initializable {
     LocalDate today = LocalDate.now();
 
+    @FXML
+    private Button previousMonth;
 
+    @FXML
+    private Button nextMonth;
     @FXML
     private Label x1y1;
     @FXML
@@ -105,6 +114,7 @@ public class Calendar implements Initializable {
 
     private static final LocalDate date = LocalDate.now();
 
+    private ListView selectedView;
     @FXML
     private ListView<String> listx1y1;
     @FXML
@@ -259,8 +269,8 @@ public class Calendar implements Initializable {
             Appointment a = Appointments.getAllAppointments().get(i);
             list.addAll(a);
             if (sameYear && sameMonth) {
-                if (list.get(i).getStart() != null && String.valueOf(Appointments.getAllAppointments().get(i).getStart()).substring(6, 7).equals(String.valueOf(currentMonth))) {
-                    for (int j = 1; j <= 31; j++) {
+                if (list.get(i).getStart() != null && Integer.parseInt(Appointments.getAllAppointments().get(i).getStart().substring(5, 7)) == (currentMonth)) {
+                    for (int j = 1; j <= 22; j++) {
                         if (Integer.valueOf(list.get(i).getStart().substring(8, 10)) == j) {
                             if (Integer.valueOf(x1y1.getText()) == j) {
                                 listx1y1.getItems().add(list.get(i).getTitle());
@@ -277,6 +287,67 @@ public class Calendar implements Initializable {
                             } else if (Integer.valueOf(x7y1.getText()) == j) {
                                 listx7y1.getItems().addAll(list.get(i).getTitle());
                             } else if (Integer.valueOf(x1y2.getText()) == j) {
+                                listx1y2.getItems().add(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x2y2.getText()) == j) {
+                                listx2y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x3y2.getText()) == j) {
+                                listx3y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x4y2.getText()) == j) {
+                                listx4y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x5y2.getText()) == j) {
+                                listx5y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x6y2.getText()) == j) {
+                                listx6y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x7y2.getText()) == j) {
+                                listx7y2.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x1y3.getText()) == j) {
+                                listx1y3.getItems().add(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x2y3.getText()) == j) {
+                                listx2y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x3y3.getText()) == j) {
+                                listx3y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x4y3.getText()) == j) {
+                                listx4y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x5y3.getText()) == j) {
+                                listx5y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x6y3.getText()) == j) {
+                                listx6y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x7y3.getText()) == j) {
+                                listx7y3.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x1y4.getText()) == j) {
+                                listx1y4.getItems().add(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x2y4.getText()) == j) {
+                                listx2y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x3y4.getText()) == j) {
+                                listx3y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x4y4.getText()) == j) {
+                                listx4y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x5y4.getText()) == j) {
+                                listx5y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x6y4.getText()) == j) {
+                                listx6y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x7y4.getText()) == j) {
+                                listx7y4.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x1y5.getText()) == j) {
+                                listx1y5.getItems().add(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x2y5.getText()) == j) {
+                                listx2y5.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x3y5.getText()) == j) {
+                                listx3y5.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x4y5.getText()) == j) {
+                                listx4y5.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x5y5.getText()) == j) {
+                                listx5y5.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x6y5.getText()) == j) {
+                                listx6y5.getItems().addAll(list.get(i).getTitle());
+                            } else if (Integer.valueOf(x7y5.getText()) == j) {
+                                listx7y5.getItems().addAll(list.get(i).getTitle());
+                            }
+                        }
+                    }
+                    for (int j = 23; j <= 31; j++) {
+                        if (Integer.valueOf(list.get(i).getStart().substring(8, 10)) == j) {
+                            if (Integer.valueOf(x1y2.getText()) == j) {
                                 listx1y2.getItems().add(list.get(i).getTitle());
                             } else if (Integer.valueOf(x2y2.getText()) == j) {
                                 listx2y2.getItems().addAll(list.get(i).getTitle());
@@ -366,7 +437,7 @@ public class Calendar implements Initializable {
     public void refreshDate() {
         clearDates();
         int thisYear = LocalDate.now().getYear();
-        Month formMonth = Month.of(today.getMonthValue());
+        Month formMonth = Month.of(datePicker.getValue().getMonthValue());
         Integer formDay = today.getDayOfMonth();
         if (datePicker.getValue() != null) {
             thisYear = datePicker.getValue().getYear();
@@ -1601,10 +1672,19 @@ public class Calendar implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        datePicker.setValue(LocalDate.now());
         month.setText(today.getMonth().toString());
         populateCal();
         populateAppointments();
         refreshDate();
+        for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
+            System.out.println(Appointments.getAllAppointments().get(i).getStart());
+            if ((Appointments.getAllAppointments().get(i).getStart().substring(0,10)).equals(LocalDate.now().toString()));
+//            && Integer.parseInt((Appointments.getAllAppointments().get(i).getStart().substring(11,19))) <= Integer.parseInt(String.valueOf(LocalTime.now().minusMinutes(60)).substring(0,2))
+//            && Integer.parseInt((Appointments.getAllAppointments().get(i).getStart().substring(11,19))) >= Integer.parseInt(String.valueOf(LocalTime.now()).substring(0,2))){
+                System.out.println("There's an appointment soon!");
+//            }
+        }
     }
 
     public void goToCustomers(ActionEvent event) throws IOException {
@@ -1627,5 +1707,46 @@ public class Calendar implements Initializable {
         window.setScene(projectScene);
         window.setTitle("Appointments");
         window.show();
+    }
+
+    public void previousMonth(ActionEvent event) {
+        datePicker.setValue(datePicker.getValue().minusMonths(1));
+        refreshDate();
+        month.setText(String.valueOf(Month.valueOf(month.getText())));
+    }
+
+    public void nextMonth(ActionEvent event) {
+        datePicker.setValue(datePicker.getValue().plusMonths(1));
+        refreshDate();
+        month.setText(String.valueOf(Month.valueOf(month.getText())));
+    }
+
+    @FXML
+    private Button Weekly;
+
+    @FXML
+    public void goToWeekly(ActionEvent event) throws IOException {
+        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/CalendarWeekly.fxml"));
+        Scene projectScene = new Scene(projectParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(projectScene);
+        window.setTitle("Weekly");
+        window.show();
+    }
+
+
+    public ListView getSelectedView() {
+        return selectedView;
+    }
+
+    public void setSelectedView(ListView selectedView) {
+
+    }
+
+    public void setSelectedView(MouseEvent mouseEvent) {
+        this.selectedView = selectedView;
+        System.out.println(selectedView);
     }
 }

@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.AddAppointment;
+import Controller.Appointments;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,8 +20,8 @@ public class Appointment {
     private String contact;
     private String type;
     private String url;
-    private String  start;
-    private String  end;
+    private String start;
+    private String end;
     private Date createdDate;
     private String createdBy;
     private Timestamp lastUpdate;

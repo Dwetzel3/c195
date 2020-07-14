@@ -13,19 +13,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Calendar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Calendar">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Label fx:id="month" text="Month">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </Label>
-            <DatePicker fx:id="datePicker" onAction="#refreshDate" />
+            <VBox alignment="CENTER" prefHeight="0.0" prefWidth="800.0">
+               <children>
+                  <Label fx:id="month" alignment="CENTER" prefHeight="40.0" prefWidth="187.0" text="Month">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="252.0" prefWidth="800.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="previousMonth" mnemonicParsing="false" onAction="#previousMonth" text="&lt;" />
+                        <DatePicker fx:id="datePicker" onAction="#refreshDate" />
+                        <Button fx:id="nextMonth" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <HBox maxWidth="590.0" prefHeight="23.0" prefWidth="590.0">
                <children>
                   <Label alignment="CENTER" prefWidth="84.0" text="Sunday" textAlignment="JUSTIFY">
@@ -101,7 +111,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx1y1" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="listx1y1" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="200.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -115,7 +125,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx2y1" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx2y1" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -129,7 +139,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx3y1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx3y1" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -143,7 +153,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx4y1" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx4y1" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -157,7 +167,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx5y1" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx5y1" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -171,7 +181,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx6y1" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx6y1" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -185,7 +195,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx7y1" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx7y1" onMouseDragged="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -199,7 +209,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx1y2" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx1y2" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -213,7 +223,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx2y2" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx2y2" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -227,7 +237,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx3y2" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx3y2" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -241,7 +251,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx4y2" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx4y2" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -255,7 +265,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx5y2" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx5y2" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -269,7 +279,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx6y2" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx6y2" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -283,7 +293,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx7y2" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx7y2" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -297,7 +307,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx1y3" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx1y3" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -311,7 +321,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx2y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx2y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -325,7 +335,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx1y4" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx1y4" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -339,7 +349,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx2y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx2y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -353,7 +363,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx1y5" prefHeight="81.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx1y5" onMouseClicked="#setSelectedView" prefHeight="81.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -367,7 +377,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx2y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx2y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -381,7 +391,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx3y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx3y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -395,7 +405,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx4y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx4y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -409,7 +419,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx5y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx5y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -423,7 +433,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx6y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx6y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -437,7 +447,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx7y3" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx7y3" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -451,7 +461,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx3y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx3y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -465,7 +475,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx4y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx4y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -479,7 +489,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx3y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx3y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -493,7 +503,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx4y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx4y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -507,7 +517,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx5y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx5y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -521,7 +531,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx5y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx5y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -535,7 +545,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx6y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx6y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -549,7 +559,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx7y4" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx7y4" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -563,7 +573,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx7y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx7y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -577,7 +587,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ListView fx:id="listx6y5" prefHeight="200.0" prefWidth="63.0" />
+                                                <ListView fx:id="listx6y5" onMouseClicked="#setSelectedView" prefHeight="200.0" prefWidth="63.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -593,10 +603,21 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="50.0">
+            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="800.0" spacing="50.0">
                <children>
-                  <Button fx:id="customersBtn" mnemonicParsing="false" onAction="#goToCustomers" text="Customers" />
-                  <Button fx:id="appointmentsBtn" mnemonicParsing="false" onAction="#goToAppointments" text="Appointments" />
+                  <Button fx:id="customersBtn" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="50.0" prefWidth="120.0" text="Customers">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font></Button>
+                  <Button fx:id="appointmentsBtn" minHeight="50.0" minWidth="120.0" mnemonicParsing="false" onAction="#goToAppointments" text="Appointments">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font></Button>
+                  <Button fx:id="Weekly" minHeight="50.0" minWidth="120.0" mnemonicParsing="false" onAction="#goToWeekly" text="Weekly">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </HBox>
          </children>

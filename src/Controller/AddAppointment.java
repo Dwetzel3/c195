@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -29,59 +30,34 @@ import java.util.TimeZone;
 import static Controller.Customers.statement;
 
 public class AddAppointment implements Initializable {
-    @FXML
-    private TextField StartField;
 
     @FXML
-    private TextField EndField;
+    private TableView<Appointment> AppointmentsTable;
+
 
     @FXML
-    private TextField CreatedField;
+    private TableColumn<Appointment, Integer> CustomerCol;
 
     @FXML
-    private TextField CreatedByField;
+    private TableColumn<Appointment, Integer> UserCol;
 
     @FXML
-    private TextField LastUpdateField;
+    private TableColumn<Appointment, String> TitleCol;
 
     @FXML
-    private TextField LastUpdatedByField;
+    private TableColumn<Appointment, String> DescriptionCol;
 
     @FXML
-    private TableView<?> AppointmentsTable;
+    private TableColumn<Appointment, String> StartCol;
 
     @FXML
-    private TableColumn<?, ?> CustomerCol;
+    private TableColumn<Appointment, String> EndCol;
 
     @FXML
-    private TableColumn<?, ?> UserCol;
+    private TableColumn<Appointment, String> LastUpdatedCol;
 
     @FXML
-    private TableColumn<?, ?> TitleIdCol;
-
-    @FXML
-    private TableColumn<?, ?> DescriptionCol;
-
-    @FXML
-    private TableColumn<?, ?> StartCol;
-
-    @FXML
-    private TableColumn<?, ?> EndCol;
-
-    @FXML
-    private TableColumn<?, ?> LastUpdatedCol;
-
-    @FXML
-    private TableColumn<?, ?> LastUpdatedByCol;
-
-    @FXML
-    private Button SaveBtn;
-
-    @FXML
-    private Button DeleteBtn;
-
-    @FXML
-    private Button exitBtn;
+    private TableColumn<Appointment, String> LastUpdatedByCol;
 
     @FXML
     private TextField CustomerIdField;
@@ -146,8 +122,16 @@ public class AddAppointment implements Initializable {
     }
 
     public void saveAppointment(ActionEvent event) throws IOException, SQLException {
-        System.out.println(assignedDate.getValue().toString() + " " + startTime.getValue() + ":00:00");
-        String appointmentId = String.valueOf(0);
+        Boolean valid = true;
+        java.util.Date date = Date.valueOf(assignedDate.getValue());
+        if (!TimeZone.getDefault().inDaylightTime(date)) {
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26)) - 1;
+        } else if (TimeZone.getDefault().inDaylightTime(date)){
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26));
+        }
+        int startOffset = (Integer.valueOf(startTime.getValue().substring(0,2)) - AddAppointment.offset);
+        int endOffset = (Integer.valueOf(endTime.getValue().substring(0,2)) - AddAppointment.offset);
+        String appointmentId = String.valueOf(Appointments.getAllAppointments().get(Appointments.getAllAppointments().size() - 1).getAppointmentId()+1);
         String customerId = String.valueOf(CustomerIdField.getText());
         String userId = String.valueOf(UserIdField.getText());
         String title = String.valueOf(TitleField.getText());
@@ -156,17 +140,26 @@ public class AddAppointment implements Initializable {
         String contact = ContactField.getText();
         String type = TypeField.getText();
         String url = URLField.getText();
-        String starts = assignedDate.getValue().toString() + " " + Integer.valueOf(startTime.getValue().substring(0,2)) + ":00:00";
-        String ends = assignedDate.getValue().toString() + " " + Integer.valueOf(endTime.getValue().substring(0,2)) + ":00:00";
-        String start = assignedDate.getValue().toString() + " " + (Integer.valueOf(startTime.getValue()) - offset) + ":00:00";
-        String end = assignedDate.getValue().toString() + " " + (Integer.valueOf(endTime.getValue()) - offset) + ":00:00";
+        if (Integer.valueOf(startOffset) >= 24) {
+            startOffset = ((Integer.valueOf(startTime.getValue().substring(0,2)) - 24));
+        }
+        if (Integer.valueOf(endOffset) >= 24) {
+            endOffset = ((Integer.valueOf(endTime.getValue().substring(0,2)) - 24));
+        }
+        String start = assignedDate.getValue().toString() + " " + Integer.valueOf(startTime.getValue().substring(0,2)) + ":00:00";
+        String end = assignedDate.getValue().toString() + " " + Integer.valueOf(endTime.getValue().substring(0,2)) + ":00:00";
+        String starts = assignedDate.getValue().toString() + " " + startOffset + ":00:00";
+        String ends = assignedDate.getValue().toString() + " " + endOffset + ":00:00";
+        int selectedStartTime = Integer.parseInt(startTime.getValue().substring(0,2));
+        int selectedEndTime = Integer.parseInt(endTime.getValue().substring(0,2));
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
 
-        String insertStatement = "INSERT INTO appointments(customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+        String insertStatement = "INSERT INTO appointments(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 "VALUES(" +
+                "'" + appointmentId + "'," +
                 "'" + customerId + "'," +
                 "'" + userId + "'," +
                 "'" + title + "'," +
@@ -175,17 +168,26 @@ public class AddAppointment implements Initializable {
                 "'" + contact + "'," +
                 "'" + type + "'," +
                 "'" + url + "'," +
-                "'" + start + "'," +
-                "'" + end + "'," +
+                "'" + starts + "'," +
+                "'" + ends + "'," +
                 "'" + createDate + "'," +
                 "'" + createdBy + "'," +
                 "'" + lastUpdate + "'," +
                 "'" + lastUpdateBy + "'" +
                 ");";
-        Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description,location, contact, type, url, starts, ends, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+        Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description,location, contact, type, url, start, end, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
 
-        Appointments.addNewAppointment(appointment);
-        statement.execute(insertStatement);
+
+        if (selectedStartTime < 9 || selectedStartTime > 17
+                || selectedEndTime < 9 || selectedEndTime > 17) {
+            valid = false;
+            Appointments.alertHours();
+        }
+
+        if (valid) {
+            Appointments.addNewAppointment(appointment);
+            statement.execute(insertStatement);
+        }
 
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -203,11 +205,22 @@ public class AddAppointment implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList startChoiceBox = FXCollections.observableArrayList();
-        startChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
+        startChoiceBox.addAll("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
         startTime.setItems(startChoiceBox);
 
         ObservableList endChoiceBox = FXCollections.observableArrayList();
-        endChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
+        endChoiceBox.addAll("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
         endTime.setItems(endChoiceBox);
+
+        AppointmentsTable.setItems(Appointments.getAllAppointments());
+
+        CustomerCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        UserCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        StartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        EndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        LastUpdatedCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        LastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
     }
 }

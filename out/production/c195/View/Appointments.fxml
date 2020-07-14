@@ -22,20 +22,30 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <TableView fx:id="AppointmentsTable" prefHeight="200.0" prefWidth="435.0">
+            <TableView fx:id="AppointmentsTable" prefHeight="330.0" prefWidth="435.0">
                <columns>
-                  <TableColumn fx:id="CustomerIdCol" prefWidth="63.0" text="Customer" />
-                  <TableColumn fx:id="UserCol" prefWidth="45.0" text="User" />
-                  <TableColumn fx:id="TitleCol" prefWidth="83.0" text="Title" />
-                  <TableColumn fx:id="DescriptionCol" prefWidth="110.0" text="Description" />
-                  <TableColumn fx:id="StartCol" prefWidth="133.0" text="Start" />
-                  <TableColumn fx:id="EndCol" prefWidth="125.0" text="End" />
-                  <TableColumn fx:id="LastUpdatedCol" prefWidth="103.0" text="Last Updated" />
-                  <TableColumn fx:id="UpdatedByCol" prefWidth="111.0" text="Updated By" />
+                  <TableColumn fx:id="appointmentId" prefWidth="21.0" text="ID" />
+                  <TableColumn fx:id="CustomerIdCol" prefWidth="84.0" text="Customer" />
+                  <TableColumn fx:id="UserCol" prefWidth="66.0" text="User" />
+                  <TableColumn fx:id="TitleCol" prefWidth="69.0" text="Title" />
+                  <TableColumn fx:id="DescriptionCol" prefWidth="100.0" text="Description" />
+                  <TableColumn fx:id="StartCol" prefWidth="157.0" text="Start" />
+                  <TableColumn fx:id="EndCol" prefWidth="100.0" text="End" />
+                  <TableColumn fx:id="LastUpdatedCol" prefWidth="90.0" text="Last Updated" />
+                  <TableColumn fx:id="UpdatedByCol" prefWidth="72.0" text="Updated By" />
                </columns>
             </TableView>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="760.0">
                <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="goToCustomer" alignment="CENTER" mnemonicParsing="false" onAction="#goToCustomer" prefHeight="30.0" prefWidth="141.0" text="Go To Customer">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <children>
                         <Button fx:id="AddAppointment" mnemonicParsing="false" onAction="#GoToAddAppointments" prefWidth="75.0" text="Add">
@@ -53,7 +63,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#goToMain" prefWidth="75.0" text="Exit">
+                        <Button fx:id="exitBtn1" mnemonicParsing="false" onAction="#goToMain" prefWidth="75.0" text="Exit">
                            <font>
                               <Font size="14.0" />
                            </font>
