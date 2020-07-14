@@ -19,12 +19,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import static Controller.Customers.addNewCustomer;
 import static Controller.Customers.getAllCustomers;
 import static javafx.collections.FXCollections.*;
 
@@ -68,7 +70,7 @@ public class AddCustomers implements Initializable {
     private TextField addressIdField;
 
     @FXML
-    private ChoiceBox<Boolean> activeCB;
+    private ChoiceBox<Integer> activeCB;
 
     @FXML
     private HBox createdDateField;
@@ -119,16 +121,21 @@ public class AddCustomers implements Initializable {
     }
 
     public void saveCustomer(ActionEvent event) throws IOException, SQLException {
+        String active = "true";
+        String customerId = String.valueOf(Customers.getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1);
         String customerName = customerNameField.getText();
         String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
-        String active = String.valueOf(activeCB.getValue());
+        if (activeCB.getValue() == 0) {
+            active = "false";
+        }
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
-        String lastUpdateBy = lastUpdatedByField.getText();
+        String lastUpdateBy = LogIn.getUsername();
 
-        String insertStatement = "INSERT INTO customers(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+        String insertStatement = "INSERT INTO customers(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 "VALUES(" +
+                "'" + customerId + "'," +
                 "'" + customerName + "'," +
                 "'" + addressID + "'," +
                 "'" + active + "'," +
@@ -139,8 +146,8 @@ public class AddCustomers implements Initializable {
                 ");";
         Customer customer = new Customer(customerID, customerName, Integer.parseInt(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
         Customers.addNewCustomer(customer);
+
         statement.execute(insertStatement);
-        System.out.println(activeCB.getValue());
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
 

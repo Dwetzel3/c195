@@ -28,6 +28,7 @@ public class Customer {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
+
     }
 
     public static ObservableList<Customer> allCustomers = FXCollections.observableArrayList();

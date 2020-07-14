@@ -67,6 +67,10 @@ public class Customers implements Initializable {
 
     String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
 
+    public static void updateCustomer(int thisIndex, Customer customer) {
+        allCustomers.set(thisIndex, customer);
+    }
+
     public void addCustomer(ActionEvent event) throws IOException {
     Parent projectParent = FXMLLoader.load(getClass().getResource("../View/AddCustomers.fxml"));
     Scene projectScene = new Scene(projectParent);
@@ -77,7 +81,6 @@ public class Customers implements Initializable {
     window.setTitle("Add Customer");
     window.show();
 }
-
     public static void addNewCustomer(Customer newCustomer) {
         allCustomers.add(newCustomer);
     }
@@ -92,6 +95,18 @@ public class Customers implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToAppointments(ActionEvent event) throws IOException {
+
+        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
+        Scene projectScene = new Scene(projectParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(projectScene);
+        window.setTitle("Appointments");
+        window.show();
     }
 
     public void goToUpdateCustomer(ActionEvent event) throws IOException {
@@ -139,10 +154,11 @@ public class Customers implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 //sort TableViews
         customersTable.getSortOrder().setAll();
-        //set up initial values in table
+//        set up initial values in table
         customersTable.setItems(getAllCustomers());
 
         //Setup PartTable
+        customersTable.getSelectionModel().select(getSelectedCustomer());
         customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressID.setCellValueFactory(new PropertyValueFactory<>("addressID"));

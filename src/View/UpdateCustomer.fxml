@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateCustomer">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateCustomer">
    <children>
-      <VBox alignment="CENTER" layoutX="271.0" prefHeight="447.0" prefWidth="529.0">
+      <VBox alignment="CENTER" layoutX="271.0" prefHeight="447.0" prefWidth="693.0">
          <children>
             <Label text="Update Customer">
                <font>
@@ -24,16 +24,16 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <TableView fx:id="customersTable" prefHeight="167.0" prefWidth="818.0">
+            <TableView fx:id="customersTable" prefHeight="330.0" prefWidth="818.0">
                <columns>
                   <TableColumn fx:id="customerIDCol" prefWidth="37.0" text="C ID" />
-                  <TableColumn fx:id="customerNameCol" prefWidth="71.0" text="Name" />
-                  <TableColumn fx:id="addressIDCol" prefWidth="59.0" text="Address ID" />
-                  <TableColumn fx:id="activeCol" prefWidth="52.0" text="Active" />
-                  <TableColumn fx:id="createdDateCol" prefWidth="82.0" text="Create Date" />
-                  <TableColumn fx:id="createdByCol" prefWidth="90.0" text="Created By" />
-                  <TableColumn fx:id="lastUpdateCol" prefWidth="62.0" text="Last Updated" />
-                  <TableColumn fx:id="lastUpdatedByCol" prefWidth="35.0" text="Updated By" />
+                  <TableColumn fx:id="customerNameCol" prefWidth="96.0" text="Name" />
+                  <TableColumn fx:id="addressIDCol" prefWidth="72.0" text="Address ID" />
+                  <TableColumn fx:id="activeCol" prefWidth="49.0" text="Active" />
+                  <TableColumn fx:id="createdDateCol" prefWidth="107.0" text="Create Date" />
+                  <TableColumn fx:id="createdByCol" prefWidth="94.0" text="Created By" />
+                  <TableColumn fx:id="lastUpdateCol" prefWidth="107.0" text="Last Updated" />
+                  <TableColumn fx:id="lastUpdatedByCol" prefWidth="90.0" text="Updated By" />
                </columns>
             </TableView>
             <VBox prefHeight="200.0" prefWidth="100.0">
@@ -41,11 +41,6 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <children>
                         <Button fx:id="addCustomer" mnemonicParsing="false" onAction="#saveCustomer" prefWidth="75.0" text="Save">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefWidth="75.0" text="Delete">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -77,7 +72,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <TextField fx:id="customerIdField" editable="false" prefHeight="25.0" prefWidth="118.0" />
+                  <TextField fx:id="customerIdField" blendMode="DARKEN" editable="false" prefHeight="25.0" prefWidth="136.0" />
                </children>
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
@@ -117,7 +112,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="128.0" />
+                  <TextField fx:id="createdDateField" editable="false" prefHeight="25.0" prefWidth="128.0" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="250.0">
@@ -127,7 +122,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="128.0" />
+                  <TextField fx:id="createdByField" editable="false" prefHeight="25.0" prefWidth="128.0" />
                </children>
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
@@ -137,7 +132,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="lastUpdatedByField" prefHeight="25.0" prefWidth="128.0" />
+                  <TextField fx:id="lastUpdateField" editable="false" prefHeight="25.0" prefWidth="128.0" />
                </children>
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
@@ -147,7 +142,7 @@
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="25.0" prefWidth="128.0" />
+                  <TextField fx:id="lastUpdatedByField" editable="false" prefHeight="25.0" prefWidth="128.0" />
                </children>
             </HBox>
          </children>

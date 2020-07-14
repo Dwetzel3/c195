@@ -27,35 +27,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        //String insertStatement = "INSERT INTO country(country, createDate, createdBy, lastUpdateBy) VALUES('US', '2020-06-06 00:00:00', 'admin', 'admin')";
-
-        // var insert
-//        String XsearchName = "SELECT customerName FROM customers WHERE customerId = 17;";
-//        String XcustomerName = "Daniel";
-//        String XaddressID = "10";
-//        String Xactive = "1";
-//        String XcreateDate = "2020-06-06";
-//        String XcreatedBy = "admin";
-//        String XlastUpdate = "2020-06-06 00:00:00";
-//        String XlastUpdateBy = "admin";
-//
-//        String insertStatement = "INSERT INTO customers(customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + XcustomerName + "'," +
-//                "'" + XaddressID + "'," +
-//                "'" + Xactive + "'," +
-//                "'" + XcreateDate + "'," +
-//                "'" + XcreatedBy + "'," +
-//                "'" + XlastUpdate + "'," +
-//                "'" + XlastUpdateBy + "'" +
-//                ");";
-//
-//                // execute sql statement
-////        statement.execute(deleteAll);
-//        statement.execute(insertStatement);
-
-        // Update statement
-
         Connection conn = LogIn.conn;
         try {
             DBQuery.setStatement(conn);

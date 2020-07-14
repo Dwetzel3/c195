@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -26,10 +27,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
-import static Controller.Customers.getSelectedCustomer;
-import static Controller.Customers.statement;
+import static Controller.Appointments.getSelectedAppointment;
+import static Controller.Customers.*;
 
 public class UpdateAppointment implements Initializable {
+
+    @FXML
+    private TableView<Appointment> AppointmentsTable;
 
 
     @FXML
@@ -38,6 +42,29 @@ public class UpdateAppointment implements Initializable {
     @FXML
     private ChoiceBox<String> endTimeCB;
 
+    @FXML
+    private TableColumn<Appointment, Integer> CustomerCol;
+
+    @FXML
+    private TableColumn<Appointment, Integer> UserCol;
+
+    @FXML
+    private TableColumn<Appointment, String> TitleCol;
+
+    @FXML
+    private TableColumn<Appointment, String> DescriptionCol;
+
+    @FXML
+    private TableColumn<Appointment, String> StartCol;
+
+    @FXML
+    private TableColumn<Appointment, String> EndCol;
+
+    @FXML
+    private TableColumn<Appointment, String> LastUpdatedCol;
+
+    @FXML
+    private TableColumn<Appointment, String> LastUpdatedByCol;
 
     @FXML
     private TextField CreatedField;
@@ -59,6 +86,9 @@ public class UpdateAppointment implements Initializable {
 
     @FXML
     private Button exitBtn;
+
+    @FXML
+    private TextField AppointmentField;
 
     @FXML
     private TextField CustomerIdField;
@@ -102,15 +132,18 @@ public class UpdateAppointment implements Initializable {
     }
 
     public void saveAppointment(ActionEvent event) throws IOException, SQLException {
+        Boolean valid = true;
         java.util.Date date = Date.valueOf(assignedDate.getValue());
         if (!TimeZone.getDefault().inDaylightTime(date)) {
-            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26)) - 1;
-        } else if (TimeZone.getDefault().inDaylightTime(date)){
-            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23,26));
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23, 26)) - 1;
+        } else if (TimeZone.getDefault().inDaylightTime(date)) {
+            AddAppointment.offset = Integer.valueOf(ZonedDateTime.now().toString().substring(23, 26));
         }
-        System.out.println(assignedDate.getValue().toString() + " " + (Integer.valueOf(startTimeCB.getValue().substring(0,2)) + AddAppointment.offset) + ":00:00");
-
-        String appointmentId = String.valueOf(UserIdField.getText());
+        int startOffset = (Integer.valueOf(startTimeCB.getValue().substring(0, 2)) - AddAppointment.offset);
+        int endOffset = (Integer.valueOf(endTimeCB.getValue().substring(0, 2)) - AddAppointment.offset);
+        int startTime = Integer.parseInt(startTimeCB.getValue().substring(0, 2));
+        int endTime = Integer.parseInt(endTimeCB.getValue().substring(0, 2));
+        String appointmentId = String.valueOf(AppointmentField.getText());
         String customerId = String.valueOf(CustomerIdField.getText());
         String userId = String.valueOf(UserIdField.getText());
         String title = TitleField.getText();
@@ -119,35 +152,107 @@ public class UpdateAppointment implements Initializable {
         String contact = ContactField.getText();
         String type = TypeField.getText();
         String url = URLField.getText();
-        String starts = assignedDate.getValue().toString() + " " + Integer.valueOf(startTimeCB.getValue().substring(0,2)) + ":00:00";
-        String ends = assignedDate.getValue().toString() + " " + Integer.valueOf(endTimeCB.getValue().substring(0,2)) + ":00:00";
-        String start = assignedDate.getValue().toString() + " " + (Integer.valueOf(startTimeCB.getValue().substring(0,2)) - AddAppointment.offset) + ":00:00";
-        String end = assignedDate.getValue().toString() + " " + (Integer.valueOf(endTimeCB.getValue().substring(0,2)) - AddAppointment.offset) + ":00:00";
-        String createDate = String.valueOf(new Date(System.currentTimeMillis()));
-        String createdBy = LogIn.getUsername();
+        if (startOffset >= 24) {
+            startOffset = ((Integer.valueOf(startTimeCB.getValue().substring(0, 2)) - 24));
+        }
+        if (endOffset >= 24) {
+            endOffset = ((Integer.valueOf(endTimeCB.getValue().substring(0, 2)) - 24));
+        }
+        String start = assignedDate.getValue() + " " + startTimeCB.getValue().substring(0, 2) + ":00:00";
+        String end = assignedDate.getValue() + " " + endTimeCB.getValue().substring(0, 2) + ":00:00";
+        String starts = assignedDate.getValue() + " " + startOffset + ":00:00";
+        String ends = assignedDate.getValue() + " " + endOffset + ":00:00";
+        String createDate = String.valueOf(getSelectedAppointment().getCreatedDate());
+        String createdBy = getSelectedAppointment().getCreatedBy();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
-
 
         String alterStatement = "UPDATE appointments " +
                 "SET userId = '" + userId + "'," +
                 "customerId = '" + customerId + "'," +
+                "title = '" + title + "'," +
+                "appointmentId = '" + appointmentId + "'," +
                 "description = '" + description + "'," +
                 "location = '" + location + "'," +
                 "contact = '" + contact + "'," +
                 "type = '" + type + "'," +
-                "start = '" + start + "'," +
-                "end = '" + end + "'," +
+                "start = '" + starts + "'," +
+                "end = '" + ends + "'," +
                 "url = '" + url +
-                "' WHERE appointmentId = '" + Appointments.getSelectedAppointment().getAppointmentId() + "';";
-        System.out.println(start);
-        System.out.println(end);
+                "' WHERE appointmentId = '" + getSelectedAppointment().getAppointmentId() + "';";
 //
 
-        Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.valueOf(customerId), Integer.valueOf(userId), title, description, location, contact, type, url, starts, ends, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+        /**
+         * Checks to see if hours selected are between 9 A.M. and 5 P.M.
+         */
 
-        Appointments.updateAppointment(Integer.valueOf(UserIdField.getText()), appointment);
-        statement.execute(alterStatement);
+        if (startTime < 9 || startTime > 17
+                || endTime < 9 || endTime > 17) {
+            valid = false;
+            Appointments.alertHours();
+        }
+
+        /***
+         Checks to see if time selected is unique
+         */
+        for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
+            if (Appointments.getAllAppointments().get(i).getStart().substring(0, 10).equals(assignedDate.getValue().toString())
+                    && Appointments.getAllAppointments().get(i).getAppointmentId() != getSelectedAppointment().getAppointmentId()) {
+                if (startTime < Integer.parseInt(Appointments.getAllAppointments().get(i).getEnd().substring(11, 13))
+                        && endTime > Integer.parseInt(Appointments.getAllAppointments().get(i).getStart().substring(11, 13))) {
+                    System.out.println(Integer.parseInt(Appointments.getAllAppointments().get(i).getStart().substring(11, 13)));
+                    System.out.println(Integer.parseInt(Appointments.getAllAppointments().get(i).getEnd().substring(11, 13)));
+                    valid = false;
+                    Appointments.alertOverlap();
+                }
+            }
+        }
+
+
+        /**
+         * Displays error if non-existent data entered
+         */
+
+
+        if (CustomerIdField.getText().isEmpty() ||
+                UserIdField.getText().isEmpty() ||
+                TitleField.getText().isEmpty() ||
+                DescriptionField.getText().isEmpty() ||
+                LocationField.getText().isEmpty() ||
+                ContactField.getText().isEmpty() ||
+                TypeField.getText().isEmpty() ||
+                URLField.getText().isEmpty() ||
+                assignedDate.getValue() == null ||
+                startTimeCB.getValue().isEmpty() ||
+                endTimeCB.getValue().isEmpty()) {
+            valid = false;
+            Appointments.alertEmpty();
+        }
+
+        /**
+         * Checks if input is of appropriate type
+         */
+
+        try {
+           Integer.parseInt(CustomerIdField.getText());
+           Integer.parseInt(UserIdField.getText());
+        } catch (NumberFormatException e) {
+            valid = false;
+            Appointments.alertType();
+        }
+
+
+        /**
+         * If tests are passed, executes the update and alter statement
+         */
+
+        if (valid) {
+            System.out.println("valid");
+            Appointment appointment = new Appointment(Integer.valueOf(appointmentId), Integer.parseInt(customerId), Integer.valueOf(userId), title, description, location, contact, type, url, start, end, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+            int thisIndex = Appointments.getAllAppointments().indexOf(getSelectedAppointment());
+            Appointments.updateAppointment(thisIndex, appointment);
+            statement.execute(alterStatement);
+        }
 
 
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
@@ -160,33 +265,49 @@ public class UpdateAppointment implements Initializable {
         window.show();
     }
 
-    public void deleteAppointment(ActionEvent event) {
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        ObservableList startChoiceBox = FXCollections.observableArrayList();
-        startChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
-        startTimeCB.setItems(startChoiceBox);
+        /**
+         * Fills in the choice boxes
+         */
 
+        ObservableList startChoiceBox = FXCollections.observableArrayList();
+        startChoiceBox.addAll("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
+        startTimeCB.setItems(startChoiceBox);
+        assignedDate.setValue(LocalDate.parse(getSelectedAppointment().getStart().substring(0,10)));
         ObservableList endChoiceBox = FXCollections.observableArrayList();
-        endChoiceBox.addAll("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
+        endChoiceBox.addAll("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
         endTimeCB.setItems(endChoiceBox);
-        assignedDate.setValue(LocalDate.parse(Appointments.getSelectedAppointment().getStart().substring(0,10)));
-        CustomerIdField.setText(String.valueOf(Appointments.getSelectedAppointment().getAppointmentId()));
-        UserIdField.setText(String.valueOf(Appointments.getSelectedAppointment().getUserID()));
-        TitleField.setText(String.valueOf(Appointments.getSelectedAppointment().getTitle()));
-        DescriptionField.setText(String.valueOf(Appointments.getSelectedAppointment().getDescription()));
-        LocationField.setText(String.valueOf(Appointments.getSelectedAppointment().getLocation()));
-        ContactField.setText(String.valueOf(Appointments.getSelectedAppointment().getContact()));
-        TypeField.setText(String.valueOf(Appointments.getSelectedAppointment().getType()));
-        URLField.setText(String.valueOf(Appointments.getSelectedAppointment().getUrl()));
-        startTimeCB.setValue(String.valueOf(Appointments.getSelectedAppointment().getStart()));
-        endTimeCB.setValue(String.valueOf(Appointments.getSelectedAppointment().getEnd()));
-        CreatedField.setText(String.valueOf(Appointments.getSelectedAppointment().getCreatedDate()));
-        CreatedByField.setText(String.valueOf(Appointments.getSelectedAppointment().getCreatedBy()));
-        LastUpdateField.setText(String.valueOf(Appointments.getSelectedAppointment().getLastUpdate()));
-        LastUpdatedByField.setText(String.valueOf(Appointments.getSelectedAppointment().getLastUpdatedBy()));
+
+        /**
+         * Fills in the textfields
+         */
+
+        AppointmentField.setText(String.valueOf(getSelectedAppointment().getAppointmentId()));
+        CustomerIdField.setText(String.valueOf(getSelectedAppointment().getCustomerID()));
+        UserIdField.setText(String.valueOf(getSelectedAppointment().getUserID()));
+        TitleField.setText(String.valueOf(getSelectedAppointment().getTitle()));
+        DescriptionField.setText(String.valueOf(getSelectedAppointment().getDescription()));
+        LocationField.setText(String.valueOf(getSelectedAppointment().getLocation()));
+        ContactField.setText(String.valueOf(getSelectedAppointment().getContact()));
+        TypeField.setText(String.valueOf(getSelectedAppointment().getType()));
+        URLField.setText(String.valueOf(getSelectedAppointment().getUrl()));
+        startTimeCB.setValue(getSelectedAppointment().getStart().substring(11,16));
+        endTimeCB.setValue(getSelectedAppointment().getEnd().substring(11,16));
+
+        /**
+         * Sets up the appointments table
+         */
+
+        AppointmentsTable.setItems(Appointments.getAllAppointments());
+        CustomerCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        UserCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        DescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        StartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        EndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        LastUpdatedCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
+        LastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
     }
 }

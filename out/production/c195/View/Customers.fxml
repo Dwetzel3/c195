@@ -22,7 +22,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <TableView fx:id="customersTable" prefHeight="200.0" prefWidth="435.0">
+            <TableView fx:id="customersTable" prefHeight="330.0" prefWidth="435.0">
                <columns>
                   <TableColumn fx:id="customerID" prefWidth="79.0" text="Customer ID" />
                   <TableColumn fx:id="customerName" prefWidth="116.0" text="Customer Name" />
@@ -36,6 +36,15 @@
             </TableView>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="goToAppointments" alignment="CENTER" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="30.0" prefWidth="162.0" text="Go To Appointments">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                      <children>
                         <Button fx:id="addCustomerBtn" mnemonicParsing="false" onAction="#addCustomer" prefWidth="75.0" text="Add">

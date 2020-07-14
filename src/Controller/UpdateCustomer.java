@@ -1,6 +1,5 @@
 package Controller;
 
-import DBConnection.DBQuery;
 import Model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,19 +15,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
-import static Controller.Customers.getAllCustomers;
-import static Controller.Customers.statement;
+import static Controller.Customers.*;
 
 
 public class UpdateCustomer implements Initializable {
@@ -74,7 +71,7 @@ public class UpdateCustomer implements Initializable {
     private ChoiceBox<Boolean> activeCB;
 
     @FXML
-    private HBox createdDateField;
+    private TextField createdDateField;
 
     @FXML
     private TextField createdByField;
@@ -95,12 +92,19 @@ public class UpdateCustomer implements Initializable {
         window.show();
     }
     public void saveCustomer(ActionEvent event) throws IOException, SQLException {
+        Boolean valid = true;
         String customerID = String.valueOf(selectedCustomer.getCustomerID());
         String customerName = customerNameField.getText();
         String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
-        String active = String.valueOf(activeCB.getValue());
-        String createDate = String.valueOf(new Date(System.currentTimeMillis()));
-        String createdBy = LogIn.getUsername();
+        String active = String.valueOf(false);
+        if (activeCB.getValue()) {
+            active = String.valueOf(true);
+        }
+
+
+
+        String createDate = getSelectedCustomer().getCreatedDate().toString();
+        String createdBy = getSelectedCustomer().getCreatedBy();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
 
@@ -114,7 +118,42 @@ public class UpdateCustomer implements Initializable {
                 " WHERE customerId = '" + customerID +
                 "';";
 
-        statement.execute(UpdateCustomer);
+        /**
+         * Checks to see that data is completely entered
+         */
+
+        if (addressID.isEmpty() ||
+        active.isEmpty() ||
+        createDate.isEmpty() ||
+        createdBy.isEmpty() ||
+        lastUpdate.isEmpty() ||
+        lastUpdateBy.isEmpty()) {
+            valid = false;
+            Appointments.alertEmpty();
+        }
+
+
+        /**
+         * Checks to see that data is of correct type
+         */
+
+        try {
+            Integer.parseInt(addressID);
+        } catch (NumberFormatException e) {
+            valid = false;
+            Appointments.alertType();
+        }
+
+        /**
+         * If valid, updates customer to database
+         */
+
+        if (valid) {
+            Customer customer = new Customer(Integer.valueOf(customerID), customerName, Integer.parseInt(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+            int thisIndex = Customers.getAllCustomers().indexOf(getSelectedCustomer());
+            Customers.updateCustomer(thisIndex, customer);
+            statement.execute(UpdateCustomer);
+        }
             Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
             Scene projectScene = new Scene(projectParent);
 
@@ -125,11 +164,14 @@ public class UpdateCustomer implements Initializable {
             window.show();
     }
 
+    /** lambda example
+ *      step 1
+     */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList choiceBox = FXCollections.observableArrayList();
-        choiceBox.addAll(0, 1);
+        choiceBox.addAll(false, true);
         activeCB.setItems(choiceBox);
 
         selectedCustomer = Customers.getSelectedCustomer();
@@ -137,7 +179,18 @@ public class UpdateCustomer implements Initializable {
 
         //set up initial values in table
         customersTable.setItems(getAllCustomers());
-
+        customerIdField.setText(String.valueOf(Customers.getSelectedCustomer().getCustomerID()));
+        customerNameField.setText(getSelectedCustomer().getCustomerName());
+        addressIdField.setText(String.valueOf(getSelectedCustomer().getAddressID()));
+        if (getSelectedCustomer().getActive() == false) {
+            activeCB.setValue(false);
+        } else {
+            activeCB.setValue(true);
+        }
+        createdDateField.setText(getSelectedCustomer().getCreatedDate().toString());
+        createdByField.setText(getSelectedCustomer().getCreatedBy());
+        lastUpdateField.setText(getSelectedCustomer().getLastUpdate().toString());
+        lastUpdatedByField.setText(getSelectedCustomer().getLastUpdatedBy());
         //Setup customer table
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
