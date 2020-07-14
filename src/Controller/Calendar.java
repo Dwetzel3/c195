@@ -1679,11 +1679,13 @@ public class Calendar implements Initializable {
         refreshDate();
         for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
             System.out.println(Appointments.getAllAppointments().get(i).getStart());
-            if ((Appointments.getAllAppointments().get(i).getStart().substring(0,10)).equals(LocalDate.now().toString()));
-//            && Integer.parseInt((Appointments.getAllAppointments().get(i).getStart().substring(11,19))) <= Integer.parseInt(String.valueOf(LocalTime.now().minusMinutes(60)).substring(0,2))
-//            && Integer.parseInt((Appointments.getAllAppointments().get(i).getStart().substring(11,19))) >= Integer.parseInt(String.valueOf(LocalTime.now()).substring(0,2))){
-                System.out.println("There's an appointment soon!");
-//            }
+            if ((Appointments.getAllAppointments().get(i).getStart().substring(0,10)).equals(LocalDate.now().toString())
+                    && Appointments.getAllAppointments().get(i).getStart() != null)
+//                    && (Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart())).after(Timestamp.valueOf(LocalTime.now().toString())))
+//                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(String.valueOf(LocalTime.now()))))
+                {
+                    System.out.println("There's an appointment soon!");
+                }
         }
     }
 
