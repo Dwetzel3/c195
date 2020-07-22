@@ -158,9 +158,8 @@ public class AddCustomers implements Initializable {
         String postalAdd = postal.getText();
         String phoneNumberAdd = phoneNumber.getText();
 
-        String insertCustomer = "INSERT INTO customer(addressId, customerName, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+        String insertCustomer = "INSERT INTO customer(customerName, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 "VALUES(" +
-                "'" + addressId + "'," +
                 "'" + customerName + "'," +
                 "'" + active + "'," +
                 "'" + createDate + "'," +
