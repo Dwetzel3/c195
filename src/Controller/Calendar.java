@@ -21,10 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
-import java.time.Year;
+import java.time.*;
 import java.util.ResourceBundle;
 
 public class Calendar implements Initializable {
@@ -1679,10 +1676,10 @@ public class Calendar implements Initializable {
         refreshDate();
         for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
             System.out.println(Appointments.getAllAppointments().get(i).getStart());
-            if ((Appointments.getAllAppointments().get(i).getStart().substring(0,10)).equals(LocalDate.now().toString())
-                    && Appointments.getAllAppointments().get(i).getStart() != null)
-//                    && (Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart())).after(Timestamp.valueOf(LocalTime.now().toString())))
-//                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(String.valueOf(LocalTime.now()))))
+            if ((Appointments.getAllAppointments().get(i).getStart().substring(0, 10)).equals(LocalDate.now().toString())
+                    && (Appointments.getAllAppointments().get(i).getStart() != null)
+                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).after(Timestamp.valueOf(LocalDateTime.now().minusMinutes(15)))
+                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(LocalDateTime.now().minusMinutes(1))))
                 {
                     System.out.println("There's an appointment soon!");
                 }
@@ -1750,5 +1747,16 @@ public class Calendar implements Initializable {
     public void setSelectedView(MouseEvent mouseEvent) {
         this.selectedView = selectedView;
         System.out.println(selectedView);
+    }
+
+    public void goToReports(ActionEvent event) throws IOException {
+        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Reports.fxml"));
+        Scene projectScene = new Scene(projectParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(projectScene);
+        window.setTitle("Reports");
+        window.show();
     }
 }

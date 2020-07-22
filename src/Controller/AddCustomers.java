@@ -1,6 +1,7 @@
 package Controller;
 
 import DBConnection.DBQuery;
+import Model.Country;
 import Model.Customer;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
@@ -72,6 +73,25 @@ public class AddCustomers implements Initializable {
     @FXML
     private ChoiceBox<Integer> activeCB;
 
+
+    @FXML
+    private TextField address;
+
+    @FXML
+    private TextField address2;
+
+    @FXML
+    private TextField city;
+
+    @FXML
+    private TextField country;
+
+    @FXML
+    private TextField postal;
+
+    @FXML
+    private TextField phoneNumber;
+
     @FXML
     private HBox createdDateField;
 
@@ -83,8 +103,6 @@ public class AddCustomers implements Initializable {
 
     @FXML
     private TextField lastUpdatedByField;
-
-    @FXML private final int customerID = getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1;
 
     Statement statement = DBQuery.getStatement();
 
@@ -121,33 +139,72 @@ public class AddCustomers implements Initializable {
     }
 
     public void saveCustomer(ActionEvent event) throws IOException, SQLException {
-        String active = "true";
-        String customerId = String.valueOf(Customers.getAllCustomers().get(Customers.getAllCustomers().size() - 1).getCustomerID()+1);
+        String active = activeCB.getValue().toString();
+        String addressId = addressIdField.getText();
+        String customerId = customerIdField.getText();
         String customerName = customerNameField.getText();
-        String addressID = String.valueOf(Integer.parseInt(addressIdField.getText()));
-        if (activeCB.getValue() == 0) {
-            active = "false";
-        }
+//        if (activeCB.getValue() == 0) {
+//            active = "false";
+//        }
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
+        String address1 = address.getText();
+        String addressTwo = address2.getText();
+        String cityAdd = city.getText();
+        String countryAdd = country.getText();
+        String countryId = String.valueOf(country.getText());
+        String postalAdd = postal.getText();
+        String phoneNumberAdd = phoneNumber.getText();
 
-        String insertStatement = "INSERT INTO customers(customerId, customerName, addressID, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+        String insertCustomer = "INSERT INTO customer(addressId, customerName, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 "VALUES(" +
-                "'" + customerId + "'," +
+                "'" + addressId + "'," +
                 "'" + customerName + "'," +
-                "'" + addressID + "'," +
                 "'" + active + "'," +
+                "'" + createDate + "'," +
+                "'" + createdBy + "'," +
+                "'" + lastUpdate + "'," +
+                "'" + lastUpdateBy + "');";
+
+        String insertAddress = "INSERT INTO address(address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                "VALUES(" +
+                "'" + address1 + "'," +
+                "'" + addressTwo + "'," +
+                "'" + cityAdd + "'," +
+                "'" + postalAdd + "'," +
+                "'" + phoneNumberAdd + "'," +
+                "'" + createDate + "'," +
+                "'" + createdBy + "'," +
+                "'" + lastUpdate + "'," +
+                "'" + lastUpdateBy + "');";
+
+        String insertCity = "INSERT INTO city(city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                "VALUES(" +
+                "'" + cityAdd + "'," +
+                "'" + countryId + "'," +
+                "'" + createDate + "'," +
+                "'" + createdBy + "'," +
+                "'" + lastUpdate + "'," +
+                "'" + lastUpdateBy + "');";
+
+        String insertCountry = "INSERT INTO country(countryId, country, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                "VALUES(" +
+                "'" + countryId + "'," +
+                "'" + countryAdd + "'," +
                 "'" + createDate + "'," +
                 "'" + createdBy + "'," +
                 "'" + lastUpdate + "'," +
                 "'" + lastUpdateBy + "'" +
                 ");";
-        Customer customer = new Customer(customerID, customerName, Integer.parseInt(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+        Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), Boolean.valueOf(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
         Customers.addNewCustomer(customer);
 
-        statement.execute(insertStatement);
+        statement.execute(insertCountry);
+        statement.execute(insertCity);
+        statement.execute(insertAddress);
+        statement.execute(insertCustomer);
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
 
@@ -167,6 +224,45 @@ public class AddCustomers implements Initializable {
         window.setScene(projectScene);
         window.setTitle("Customers");
         window.show();
+    }
+
+    public static Country getCountry(
+            int countryId
+    ) {
+        try (Connection conn = DriverManager.getConnection(LogIn.jdbcURL, LogIn.username, LogIn.password);
+             Statement stmt = conn.createStatement()) {
+
+            String query = String.format(""
+                            + "SELECT * "
+                            + "FROM country c "
+                            + "WHERE c.countryId "
+                            + "= %d "
+                            + "LIMIT 1",
+                    countryId
+            );
+
+            ResultSet country
+                    = stmt.executeQuery(query);
+
+            if (country.next()) {
+                Country countryFromDatabase;
+
+                int id = country.getInt("countryId");
+                String name = country.getString("country");
+                Timestamp createDate = country.getTimestamp("createDate");
+                String createdBy = country.getString("createdBy");
+                String lastUpdateBy = country.getString("lastUpdateBy");
+
+                countryFromDatabase = new Country(id, name, createDate,
+                        createdBy, lastUpdateBy);
+
+                return countryFromDatabase;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     @Override

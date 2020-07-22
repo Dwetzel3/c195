@@ -19,6 +19,15 @@
          <children>
             <VBox alignment="CENTER" prefHeight="0.0" prefWidth="800.0">
                <children>
+                  <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="1167.0">
+                     <children>
+                        <Button fx:id="reports" alignment="CENTER" mnemonicParsing="false" onAction="#goToReports" prefHeight="144.0" prefWidth="106.0" text="Reports">
+                           <HBox.margin>
+                              <Insets right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                   <Label fx:id="month" alignment="CENTER" prefHeight="40.0" prefWidth="187.0" text="Month">
                      <font>
                         <Font name="System Bold" size="24.0" />

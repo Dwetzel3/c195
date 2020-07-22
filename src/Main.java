@@ -49,7 +49,7 @@ public class Main extends Application {
         String search = "SELECT FROM country WHERE customerId = " + thisInt + "";
         ResultSet results = null;
         try {
-            results = statement.executeQuery("SELECT * FROM customers");
+            results = statement.executeQuery("SELECT * FROM customer");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,7 +116,7 @@ public class Main extends Application {
 
         ResultSet appointmentResults = null;
         try {
-            appointmentResults = statement.executeQuery("SELECT * FROM appointments");
+            appointmentResults = statement.executeQuery("SELECT * FROM appointment");
         } catch (SQLException e) {
             e.printStackTrace();
         }

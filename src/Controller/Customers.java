@@ -76,7 +76,6 @@ public class Customers implements Initializable {
     Scene projectScene = new Scene(projectParent);
 
     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
     window.setScene(projectScene);
     window.setTitle("Add Customer");
     window.show();

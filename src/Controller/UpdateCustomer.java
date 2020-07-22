@@ -22,7 +22,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import static Controller.Customers.*;
@@ -149,7 +148,7 @@ public class UpdateCustomer implements Initializable {
          */
 
         if (valid) {
-            Customer customer = new Customer(Integer.valueOf(customerID), customerName, Integer.parseInt(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+            Customer customer = new Customer(Integer.valueOf(customerID), customerName, Integer.valueOf(addressID), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
             int thisIndex = Customers.getAllCustomers().indexOf(getSelectedCustomer());
             Customers.updateCustomer(thisIndex, customer);
             statement.execute(UpdateCustomer);

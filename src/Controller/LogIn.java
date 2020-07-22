@@ -19,6 +19,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -41,12 +43,12 @@ public class LogIn implements Initializable {
     private static final String vendorName = ":mysql:";
     private static final String ipAddress = "//3.227.166.251/U062Ax";
 
-    private static final String jdbcURL = protocol + vendorName + ipAddress;
+    static final String jdbcURL = protocol + vendorName + ipAddress;
 
     private static final String MYSQLJDBCDriver = "com.mysql.jdbc.Driver";
 
-    private static final String username = "U062Ax";
-    private static final String password = "53688672953";
+    static final String username = "U062Ax";
+    static final String password = "53688672953";
     public static Connection conn;
 
     static Locale locale = Locale.getDefault();
@@ -114,6 +116,7 @@ public class LogIn implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(LocalDateTime.now());
 //        Comparator<String> stringComparator = new Comparator<String>() {
 //            @Override
 //            public int compare(String o1, String o2) {

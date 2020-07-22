@@ -157,7 +157,7 @@ public class AddAppointment implements Initializable {
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
 
-        String insertStatement = "INSERT INTO appointments(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+        String insertStatement = "INSERT INTO appointment(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 "VALUES(" +
                 "'" + appointmentId + "'," +
                 "'" + customerId + "'," +
