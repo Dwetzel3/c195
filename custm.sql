@@ -1,2 +1,2 @@
 USE U062Ax;
-SELECT * FROM U062Ax.appointments;
+SELECT * FROM U062Ax.address;

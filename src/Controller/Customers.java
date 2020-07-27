@@ -86,7 +86,7 @@ public class Customers implements Initializable {
 
     public void deleteCustomer(ActionEvent event) {
         setSelectedCustomer(customersTable.getSelectionModel().getSelectedItem());
-        String deleteSelected = "DELETE FROM customers WHERE customerId = " + selectedCustomer.getCustomerID() + ";";
+        String deleteSelected = "DELETE FROM customer WHERE customerId = " + selectedCustomer.getCustomerID() + ";";
         allCustomers.removeAll(selectedCustomer);
         try {
             statement.execute(deleteSelected);
@@ -97,6 +97,12 @@ public class Customers implements Initializable {
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
+        for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
+            if (customersTable.getSelectionModel().getSelectedItem().getCustomerID() == Appointments.getAllAppointments().get(i).getCustomerID()) {
+                    Appointments.setSelectedAppointment(Appointments.getAllAppointments().get(i));
+                break;
+            }
+        }
 
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
         Scene projectScene = new Scene(projectParent);

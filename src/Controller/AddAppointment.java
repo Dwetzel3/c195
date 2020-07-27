@@ -17,10 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -122,6 +119,20 @@ public class AddAppointment implements Initializable {
     }
 
     public void saveAppointment(ActionEvent event) throws IOException, SQLException {
+
+        /**
+         * Gets appointmentId Count
+         */
+        int appointmentCounter = 0;
+        ResultSet appointmentCount = statement.executeQuery("SELECT *" +
+                " FROM appointment;");
+        while (appointmentCount.next()) {
+            appointmentCounter = appointmentCount.getRow();
+        }
+        System.out.println("Appointment has " + appointmentCounter + " row(s).");
+        appointmentCount.close();
+
+
         Boolean valid = true;
         java.util.Date date = Date.valueOf(assignedDate.getValue());
         if (!TimeZone.getDefault().inDaylightTime(date)) {
@@ -131,9 +142,19 @@ public class AddAppointment implements Initializable {
         }
         int startOffset = (Integer.valueOf(startTime.getValue().substring(0,2)) - AddAppointment.offset);
         int endOffset = (Integer.valueOf(endTime.getValue().substring(0,2)) - AddAppointment.offset);
-        String appointmentId = String.valueOf(Appointments.getAllAppointments().get(Appointments.getAllAppointments().size() - 1).getAppointmentId()+1);
+        String appointmentId = String.valueOf(appointmentCounter + 1);
         String customerId = String.valueOf(CustomerIdField.getText());
-        String userId = String.valueOf(UserIdField.getText());
+
+        String userId = null;
+        ResultSet DBUser = statement.executeQuery("SELECT * FROM user;");
+        while (DBUser.next()) {
+            String DBUserId = DBUser.getString("userId");
+            String DBUserName = DBUser.getString("userName");
+            if ((LogIn.username.compareTo(DBUser.getString("userName")) == 0)) {
+                System.out.println(DBUserName + " already exists under ID: " + DBUserId + "!");
+                userId = String.valueOf(DBUser.getString("userId"));
+            }
+        }
         String title = String.valueOf(TitleField.getText());
         String description = DescriptionField.getText();
         String location = LocationField.getText();

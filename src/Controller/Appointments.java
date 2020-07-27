@@ -29,6 +29,18 @@ import java.util.TimeZone;
 import static Controller.Customers.*;
 
 public class Appointments implements Initializable {
+    private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+
+    public static Appointment getSelectedAppointment() {
+        return selectedAppointment;
+    }
+
+    public static void setSelectedAppointment(Appointment selectedAppointment) {
+        Appointments.selectedAppointment = selectedAppointment;
+    }
+
+    private static Appointment selectedAppointment;
+
     @FXML
     private TableView<Appointment> AppointmentsTable;
 
@@ -59,20 +71,10 @@ public class Appointments implements Initializable {
     @FXML
     private TableColumn<Appointment, String> UpdatedByCol;
 
-    private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
-    public static Appointment getSelectedAppointment() {
-        return selectedAppointment;
-    }
     public static void updateAppointment(int index, Appointment appointment) {
         allAppointments.set(index, appointment);
     }
-    private static Appointment selectedAppointment;
-
-    public static void setSelectedAppointment(Appointment selectedAppointment) {
-        Appointments.selectedAppointment = selectedAppointment;
-    }
-
     public void goToUpdateAppointment(ActionEvent event) throws IOException {
         setSelectedAppointment(AppointmentsTable.getSelectionModel().getSelectedItem());
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/UpdateAppointment.fxml"));
@@ -96,7 +98,12 @@ public class Appointments implements Initializable {
     }
 
     public void goToCustomer(ActionEvent event) throws IOException {
-        setSelectedCustomer(Customers.getAllCustomers().get(AppointmentsTable.getSelectionModel().getSelectedItem().getCustomerID() - 1));
+        for (int i = 0; i < Customers.getAllCustomers().size(); i++) {
+            if (getAllCustomers().get(i).getCustomerID() == AppointmentsTable.getSelectionModel().getSelectedItem().getCustomerID()) {
+                    setSelectedCustomer(Customers.getAllCustomers().get(i));
+                break;
+            }
+        }
 
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
         Scene projectScene = new Scene(projectParent);
@@ -110,7 +117,7 @@ public class Appointments implements Initializable {
     public void deleteAppointment(ActionEvent event) {
         setSelectedAppointment(AppointmentsTable.getSelectionModel().getSelectedItem());
         allAppointments = AppointmentsTable.getItems();
-        String deleteSelected = "DELETE FROM appointments WHERE appointmentID = " + selectedAppointment.getAppointmentId() + ";";
+        String deleteSelected = "DELETE FROM appointment WHERE appointmentID = " + selectedAppointment.getAppointmentId() + ";";
         allAppointments.removeAll(selectedAppointment);
         try {
             statement.execute(deleteSelected);

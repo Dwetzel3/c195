@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,12 +14,9 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import sun.security.mscapi.CPublicKey;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Comparator;
@@ -74,9 +72,24 @@ public class LogIn implements Initializable {
             conn = DriverManager.getConnection(jdbcURL, userField.getText(), passwordField.getText());
             if (lang.equals("español")) {
                 System.out.println("\n" + "Conectado a la base de datos.");
+                try(FileWriter fw = new FileWriter("Log.txt", true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter out = new PrintWriter(bw)) {
+                    out.println(username + " logged in at " + Timestamp.valueOf(LocalDateTime.now()));
+                } catch (IOException e) {
+                }
             } else if (lang.equals("English")) {
                 System.out.println("Connected to the database.");
+
+                try(FileWriter fw = new FileWriter("Log.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw)) {
+                    out.println(username + " logged in at " + Timestamp.valueOf(LocalDateTime.now()));
+                } catch (IOException e) {
+                }
             }
+            User.setUsername(username);
+            User.setPassword(password);
             Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Calendar.fxml"));
             Scene projectScene = new Scene(projectParent);
 
@@ -136,7 +149,7 @@ public class LogIn implements Initializable {
                 (String o1, String o2) -> { return  o1.compareTo(o2); };
 
         int lambdaComparison = stringComparatorLambda.compare("hello", "world");
-        System.out.println(lambdaComparison);
+//        System.out.println(lambdaComparison);
 
         /**
          * step 3 - lambda simplification
@@ -153,17 +166,17 @@ public class LogIn implements Initializable {
          */
 
         myFunction myFunction = (text1, text2) -> {
-            System.out.println(text1 + " " + text2);
+//            System.out.println(text1 + " " + text2);
             return text1 + " " + text2;
         };
 
 
         String returnValue  = myFunction.apply("hello function body", "Test");
-        System.out.println(returnValue);
+//        System.out.println(returnValue);
 
         myFunction myFunction2 = myFunction;
         String returnValue2 = myFunction2.apply("Text 1", "Text 2");
-        System.out.println(returnValue2);
+//        System.out.println(returnValue2);
 
         /**
          *

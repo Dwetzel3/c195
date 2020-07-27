@@ -82,9 +82,6 @@ public class UpdateAppointment implements Initializable {
     private Button SaveBtn;
 
     @FXML
-    private Button DeleteBtn;
-
-    @FXML
     private Button exitBtn;
 
     @FXML

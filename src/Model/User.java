@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class User {
 
-    private int userId;
-    private String username;
-    private String password;
+    private static int userId;
+    private static String username;
+    private static String password;
     private int active;
     private String createBy;
     private Timestamp createDate;
@@ -37,7 +37,7 @@ public class User {
         return lastUpdate;
     }
 
-    public int getUserId() {
+    public static int getUserId() {
         return userId;
     }
 
@@ -45,20 +45,20 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public static void setUsername(String username) {
+        User.username = username;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public static void setPassword(String password) {
+        User.password = password;
     }
 
     public int getActive() {
