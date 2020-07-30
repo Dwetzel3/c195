@@ -198,14 +198,6 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="37.0" prefWidth="800.0" spacing="50.0">
                <children>
-                  <Button fx:id="customersBtn" mnemonicParsing="false" onAction="#goToCustomers" prefHeight="50.0" prefWidth="120.0" text="Customers">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font></Button>
-                  <Button fx:id="appointmentsBtn" minHeight="50.0" minWidth="120.0" mnemonicParsing="false" onAction="#goToAppointments" text="Appointments">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font></Button>
                   <Button fx:id="appointmentsBtn1" minHeight="50.0" minWidth="120.0" mnemonicParsing="false" onAction="#goToMonthly" text="Monthly">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />

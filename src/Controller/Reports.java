@@ -33,58 +33,14 @@ import static java.time.Month.*;
 
 public class Reports  implements Initializable {
 
-
     @FXML
     private ChoiceBox<Month> appsByMonth;
-
-    private int january = 5;
-    private int february = 0;
-    private int march = 0;
-    private int april = 0;
-    private int may = 0;
-    private int june = 0;
-    private int july = 0;
-    private int august = 0;
-    private int september = 0;
-    private int october = 0;
-    private int november = 0;
-    private int december = 0;
-
 
     ObservableList<Appointment> appointmentTypes = FXCollections.observableArrayList();
     ObservableList<Month> busiestMonths = FXCollections.observableArrayList();
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        GeneralInterface message = (s, r) -> "Hello " + s + r;
-//        System.out.println(message.getMessage("Daniel", "!"));
-        // void lambda expression with one parameter
-//        GeneralInterface sum = (n1, n2) -> n1 + n2;
-//        System.out.println(sum.calculateSum(2,4));
-
-//        GeneralInterface square = n -> {
-//            int result = n * n;
-//            return result;
-//        };
-//
-        /**
-
-//        System.out.println(square.calculateSquare(6));
-//        final int num = 50;
-//
-//        GeneralInterface square = n -> n * n;
-//
-//        System.out.println(square.calculateSquare(num));
-
-         */
-//
-//        final int num = 50;
-//
-//        GeneralInterface square = n -> n * n;
-//
-//        System.out.println(square.calculateSquare(num));
-
         ObservableList appointmentsByMonth = FXCollections.observableArrayList();
         appointmentsByMonth.addAll(JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER);
         appsByMonth.setItems(appointmentsByMonth);
@@ -106,6 +62,21 @@ public class Reports  implements Initializable {
                 appointmentTypes.add(appointment);
             }
         }
+
+        /**
+         * Exceptions
+         */
+
+        if (appointmentTypes.isEmpty()) {
+            Alert empty = new Alert(Alert.AlertType.WARNING);
+            empty.setContentText("No appointments in this month");
+            empty.showAndWait();
+        } else if (appsByMonth.getValue() == null) {
+            Alert isnull = new Alert(Alert.AlertType.WARNING);
+            isnull.setContentText("Please select a month");
+            isnull.showAndWait();
+        }
+
 
         LinkedHashSet<String> al=new LinkedHashSet<String>();
         for (int i = 0; i < appointmentTypes.size(); i++) {

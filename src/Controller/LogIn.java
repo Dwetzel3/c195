@@ -123,58 +123,5 @@ public class LogIn implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(LocalDateTime.now());
-//        Comparator<String> stringComparator = new Comparator<String>() {
-//            @Override
-//            public int compare(String o1, String o2) {
-//                return o1.compareTo(o2);
-//            }
-//        };
-//
-//        int comparison = stringComparator.compare("Hello", "World");
-//        System.out.println(comparison);
-
-
-        /**
-         * step 2 - lambda implementation
-         */
-
-        Comparator<String> stringComparatorLambda =
-                (String o1, String o2) -> { return  o1.compareTo(o2); };
-
-        int lambdaComparison = stringComparatorLambda.compare("hello", "world");
-//        System.out.println(lambdaComparison);
-
-        /**
-         * step 3 - lambda simplification
-         */
-
-//        Comparator<String> stringComparatorLambda =
-//                (o1, o2) -> o1.compareTo(o2);
-//
-//        int lambdaComparison = stringComparatorLambda.compare("hello", "world");
-//        System.out.println(lambdaComparison);
-
-        /**
-         * further simplification
-         */
-
-//        myFunction myFunction = (text1, text2) -> {
-//            System.out.println(text1 + " " + text2);
-//            return text1 + " " + text2;
-//        };
-
-
-//        String returnValue  = myFunction.apply("hello function body", "Test");
-//        System.out.println(returnValue);
-
-//        myFunction myFunction2 = myFunction;
-//        String returnValue2 = myFunction2.apply("Text 1", "Text 2");
-//        System.out.println(returnValue2);
-
-        /**
-         *
-         */
-
     }
 }

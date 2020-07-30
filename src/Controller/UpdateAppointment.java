@@ -143,7 +143,7 @@ public class UpdateAppointment implements Initializable {
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
         String lastUpdateBy = LogIn.getUsername();
 
-        String alterStatement = "UPDATE appointments " +
+        String alterStatement = "UPDATE appointment " +
                 "SET userId = '" + userId + "'," +
                 "customerId = '" + customerId + "'," +
                 "title = '" + title + "'," +

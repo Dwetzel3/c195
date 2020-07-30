@@ -99,16 +99,6 @@ public class CalendarWeekly implements Initializable {
     private ListView<String> saturday;
 
     @FXML
-    void goToAppointments(ActionEvent event) {
-
-    }
-
-    @FXML
-    void goToCustomers(ActionEvent event) {
-
-    }
-
-    @FXML
     void nextWeek(ActionEvent event) {
         datePicker.setValue(datePicker.getValue().plusWeeks(1));
     }
@@ -229,10 +219,6 @@ public class CalendarWeekly implements Initializable {
         clearDates();
         populate();
     }
-
-
-    @FXML
-    private Button Weekly;
 
     @FXML
     public void goToMonthly(ActionEvent event) throws IOException {

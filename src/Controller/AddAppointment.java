@@ -60,9 +60,6 @@ public class AddAppointment implements Initializable {
     private TextField CustomerIdField;
 
     @FXML
-    private TextField UserIdField;
-
-    @FXML
     private TextField TitleField;
 
     @FXML
@@ -218,9 +215,6 @@ public class AddAppointment implements Initializable {
         window.setScene(projectScene);
         window.setTitle("Appointments");
         window.show();
-    }
-
-    public void deleteAppointment(ActionEvent event) {
     }
 
     @Override

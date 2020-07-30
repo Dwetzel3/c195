@@ -121,7 +121,6 @@ public class AddCustomers implements Initializable {
         Boolean newCity = true;
         Boolean newAddress = true;
         Boolean newCustomer = true;
-        Boolean newAppointment = true;
         Boolean newUser = true;
 
 
@@ -131,18 +130,6 @@ public class AddCustomers implements Initializable {
             String DBCustomerName = DBCustomer.getString("customerName");
             System.out.println(DBCustomerName + " is under ID: " + DBCustomerId);
         }
-
-//        ResultSet DBUser = statement.executeQuery("SELECT * FROM user;");
-//        while (DBUser.next()) {
-//            String DBUserId = DBUser.getString("userName");
-//            if (DBUserId.compareTo(DBUser.getString("userName")) == 0) {
-////                System.out.println(DBUserId + " already exists!");
-//            }
-////            if (DBUserId!=DBUser.getString("userId")) {
-////                System.out.println(DBUserId + " new customer!");
-////            }
-//        }
-
 
         /**
          * Gets countryId Count
@@ -438,45 +425,6 @@ public class AddCustomers implements Initializable {
         window.setTitle("Customers");
         window.show();
     }
-
-//    public static Country getCountry(
-//            int countryId
-//    ) {
-//        try (Connection conn = DriverManager.getConnection(LogIn.jdbcURL, LogIn.username, LogIn.password);
-//             Statement stmt = conn.createStatement()) {
-//
-//            String query = String.format(""
-//                            + "SELECT * "
-//                            + "FROM country c "
-//                            + "WHERE c.countryId "
-//                            + "= %d "
-//                            + "LIMIT 1",
-//                    countryId
-//            );
-//
-//            ResultSet country
-//                    = stmt.executeQuery(query);
-//
-//            if (country.next()) {
-//                Country countryFromDatabase;
-//
-//                int id = country.getInt("countryId");
-//                String name = country.getString("country");
-//                Timestamp createDate = country.getTimestamp("createDate");
-//                String createdBy = country.getString("createdBy");
-//                String lastUpdateBy = country.getString("lastUpdateBy");
-//
-//                countryFromDatabase = new Country(id, name, createDate,
-//                        createdBy, lastUpdateBy);
-//
-//                return countryFromDatabase;
-//            } else {
-//                return null;
-//            }
-//        } catch (SQLException e) {
-//            return null;
-//        }
-//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

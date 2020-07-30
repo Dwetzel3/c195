@@ -101,6 +101,7 @@ public class Customer {
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
+
     public Customer getSelectedCustomer() {
         return selectedCustomer;
     }

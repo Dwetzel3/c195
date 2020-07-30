@@ -65,8 +65,6 @@ public class Customers implements Initializable {
 
     static Statement statement = DBQuery.getStatement();
 
-    String deleteAll = "DELETE FROM customers WHERE customerId >= " + 0 + ";";
-
     public static void updateCustomer(int thisIndex, Customer customer) {
         allCustomers.set(thisIndex, customer);
     }
@@ -141,28 +139,29 @@ public class Customers implements Initializable {
         window.show();
     }
 
-    public void goToCustomer(ActionEvent event) throws IOException {
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Customers");
-        window.show();
-    }
-
     public static ObservableList<Customer> getAllCustomers() {
         return allCustomers;
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//sort TableViews
+
+        /**
+         * sort TableViews
+         */
+
         customersTable.getSortOrder().setAll();
-//        set up initial values in table
+
+        /**
+         * set up initial values in table
+         */
+
         customersTable.setItems(getAllCustomers());
 
-        //Setup PartTable
+        /**
+         *  Setup PartTable
+         */
+
         customersTable.getSelectionModel().select(getSelectedCustomer());
         customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -173,6 +172,4 @@ public class Customers implements Initializable {
         lastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         lastUpdatedBy.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
     }
-
-
 }

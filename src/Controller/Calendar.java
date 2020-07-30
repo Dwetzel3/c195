@@ -28,11 +28,6 @@ public class Calendar implements Initializable {
     LocalDate today = LocalDate.now();
 
     @FXML
-    private Button previousMonth;
-
-    @FXML
-    private Button nextMonth;
-    @FXML
     private Label x1y1;
     @FXML
     private Label x2y1;
@@ -1719,9 +1714,6 @@ public class Calendar implements Initializable {
         refreshDate();
         month.setText(String.valueOf(Month.valueOf(month.getText())));
     }
-
-    @FXML
-    private Button Weekly;
 
     @FXML
     public void goToWeekly(ActionEvent event) throws IOException {
