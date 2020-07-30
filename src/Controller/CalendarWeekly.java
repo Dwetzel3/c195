@@ -30,13 +30,13 @@ public class CalendarWeekly implements Initializable {
     private Label month;
 
     @FXML
-    private Button previousMonth;
+    private Button previousWeek;
 
     @FXML
     private DatePicker datePicker;
 
     @FXML
-    private Button nextMonth;
+    private Button nextWeek;
 
     @FXML
     private Label col1;
@@ -109,13 +109,13 @@ public class CalendarWeekly implements Initializable {
     }
 
     @FXML
-    void nextMonth(ActionEvent event) {
-
+    void nextWeek(ActionEvent event) {
+        datePicker.setValue(datePicker.getValue().plusWeeks(1));
     }
 
     @FXML
-    void previousMonth(ActionEvent event) {
-
+    void previousWeek(ActionEvent event) {
+        datePicker.setValue(datePicker.getValue().minusWeeks(1));
     }
 
     public void clearDates() {
@@ -131,7 +131,7 @@ public class CalendarWeekly implements Initializable {
     public void populate() {
         if (datePicker.getValue() != null) {
             if (datePicker.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
-                col1.setText(String.valueOf(datePicker.getValue().getDayOfMonth()));
+                col1.setText(String.valueOf(datePicker.getValue()));
                 col2.setText(String.valueOf(datePicker.getValue().plusDays(1)));
                 col3.setText(String.valueOf(datePicker.getValue().plusDays(2)));
                 col4.setText(String.valueOf(datePicker.getValue().plusDays(3)));

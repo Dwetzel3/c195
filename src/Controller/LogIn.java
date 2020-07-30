@@ -121,12 +121,6 @@ public class LogIn implements Initializable {
         }
     }
 
-    public void callMe(String call1) {
-        call1 = "DUDE";
-        System.out.println(call1);
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(LocalDateTime.now());
@@ -165,17 +159,17 @@ public class LogIn implements Initializable {
          * further simplification
          */
 
-        myFunction myFunction = (text1, text2) -> {
+//        myFunction myFunction = (text1, text2) -> {
 //            System.out.println(text1 + " " + text2);
-            return text1 + " " + text2;
-        };
+//            return text1 + " " + text2;
+//        };
 
 
-        String returnValue  = myFunction.apply("hello function body", "Test");
+//        String returnValue  = myFunction.apply("hello function body", "Test");
 //        System.out.println(returnValue);
 
-        myFunction myFunction2 = myFunction;
-        String returnValue2 = myFunction2.apply("Text 1", "Text 2");
+//        myFunction myFunction2 = myFunction;
+//        String returnValue2 = myFunction2.apply("Text 1", "Text 2");
 //        System.out.println(returnValue2);
 
         /**

@@ -29,9 +29,9 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="252.0" prefWidth="800.0" spacing="5.0">
                      <children>
-                        <Button fx:id="previousMonth" mnemonicParsing="false" onAction="#previousMonth" text="&lt;" />
+                        <Button fx:id="previousWeek" mnemonicParsing="false" onAction="#previousWeek" text="&lt;" />
                         <DatePicker fx:id="datePicker" onAction="#refreshDate" />
-                        <Button fx:id="nextMonth" mnemonicParsing="false" onAction="#nextMonth" text="&gt;" />
+                        <Button fx:id="nextWeek" mnemonicParsing="false" onAction="#nextWeek" text="&gt;" />
                      </children>
                   </HBox>
                </children>

@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Reports">
    <children>
-      <VBox alignment="CENTER" prefHeight="447.0" prefWidth="800.0">
+      <VBox alignment="CENTER" layoutX="-7.0" prefHeight="447.0" prefWidth="800.0">
          <children>
             <Label text="Reports">
                <font>
@@ -45,7 +45,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="additional" mnemonicParsing="false" onAction="#additional" prefHeight="30.0" prefWidth="97.0" text="Additional">
+                        <Button fx:id="Average" mnemonicParsing="false" onAction="#average" prefHeight="30.0" prefWidth="203.0" text="Average Appointments/Year">
                            <font>
                               <Font size="14.0" />
                            </font>

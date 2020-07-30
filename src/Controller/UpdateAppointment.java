@@ -67,24 +67,6 @@ public class UpdateAppointment implements Initializable {
     private TableColumn<Appointment, String> LastUpdatedByCol;
 
     @FXML
-    private TextField CreatedField;
-
-    @FXML
-    private TextField CreatedByField;
-
-    @FXML
-    private TextField LastUpdateField;
-
-    @FXML
-    private TextField LastUpdatedByField;
-
-    @FXML
-    private Button SaveBtn;
-
-    @FXML
-    private Button exitBtn;
-
-    @FXML
     private TextField AppointmentField;
 
     @FXML
@@ -98,9 +80,6 @@ public class UpdateAppointment implements Initializable {
 
     @FXML
     private TextField DescriptionField;
-
-    @FXML
-    private HBox createdDateField;
 
     @FXML
     private TextField LocationField;

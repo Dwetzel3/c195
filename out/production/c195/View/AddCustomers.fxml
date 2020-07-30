@@ -141,26 +141,6 @@
                   <ChoiceBox fx:id="activeCB" prefHeight="25.0" prefWidth="124.0" />
                </children>
             </HBox>
-            <HBox prefHeight="52.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Address ID:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="addressIdField" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="52.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Customer ID:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="customerIdField" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
-               </children>
-            </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
