@@ -1669,6 +1669,11 @@ public class Calendar implements Initializable {
         populateCal();
         populateAppointments();
         refreshDate();
+
+        /**
+         * Warns user if an appointment is within 15 minutes of local time
+         */
+
         for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
             System.out.println(Appointments.getAllAppointments().get(i).getStart());
             if ((Appointments.getAllAppointments().get(i).getStart().substring(0, 10)).equals(LocalDate.now().toString())
@@ -1676,7 +1681,7 @@ public class Calendar implements Initializable {
                     && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).after(Timestamp.valueOf(LocalDateTime.now().minusMinutes(15)))
                     && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(LocalDateTime.now().minusMinutes(1))))
                 {
-                    System.out.println("There's an appointment soon!");
+                    Appointments.alertUpcoming();
                 }
         }
     }

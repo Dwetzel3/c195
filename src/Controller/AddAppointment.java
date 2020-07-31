@@ -104,14 +104,14 @@ public class AddAppointment implements Initializable {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         df.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
-        System.out.println("Date and time in Madrid: " + df.format(date));
+//        System.out.println("Date and time in Madrid: " + df.format(date));
         if (true) {
-            System.out.println("Local: " + offset);
+//            System.out.println("Local: " + offset);
 
-            System.out.println("Date and time in Seattle: " + df.format(date));
+//            System.out.println("Date and time in Seattle: " + df.format(date));
         }
         else {
-            System.out.println("NOT!");
+//            System.out.println("NOT!");
         }
     }
 

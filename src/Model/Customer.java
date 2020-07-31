@@ -20,7 +20,7 @@ public class Customer {
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
 
-    public Customer(Integer customerId, String customerName, Integer addressID, boolean active, java.sql.Date createdDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
+    public Customer(Integer customerId, String customerName, Integer addressID, Boolean active, java.sql.Date createdDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
         this.customerID = customerId;
         this.customerName = customerName;
         this.addressID = addressID;

@@ -35,16 +35,6 @@ public class Main extends Application {
         }
         Statement statement = DBQuery.getStatement();
 
-        // confirm rows affected
-        try {
-            if (statement.getUpdateCount() > 0) {
-                System.out.println(statement.getUpdateCount() + " rows affected.");
-            } else {
-                System.out.println("No change.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         int thisInt = 5;
         String search = "SELECT FROM country WHERE customerId = " + thisInt + "";
         ResultSet results = null;
@@ -236,7 +226,7 @@ public class Main extends Application {
 
         LocalDate parisDate = LocalDate.of(2019, 10, 26);
         LocalTime timeParis = LocalTime.of(01, 00);
-        System.out.println(Appointments.getAllAppointments().get(1).getStart());
+//        System.out.println(Appointments.getAllAppointments().get(1).getStart());
         ZoneId parisZoneId = ZoneId.of("Europe/Paris");
         ZonedDateTime parisZDT = ZonedDateTime.of(parisDate, timeParis, parisZoneId);
         ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
@@ -245,16 +235,16 @@ public class Main extends Application {
         ZonedDateTime parisToLocalZDT = parisZDT.withZoneSameInstant(localZoneId);
         ZonedDateTime gmtToLocalZDT = parisToGMTInstant.atZone(localZoneId);
 
-        System.out.println("Local: " + ZonedDateTime.now());
-        System.out.println("Paris: " + parisZDT);
-        System.out.println("Paris->GMT: " + parisToGMTInstant);
-        System.out.println("GMT->Local: " + gmtToLocalZDT);
-        System.out.println("GMT->LocalDate: " + gmtToLocalZDT.toLocalDate());
-        System.out.println("GMT->LocalTime: " + gmtToLocalZDT.toLocalTime());
+//        System.out.println("Local: " + ZonedDateTime.now());
+//        System.out.println("Paris: " + parisZDT);
+//        System.out.println("Paris->GMT: " + parisToGMTInstant);
+//        System.out.println("GMT->Local: " + gmtToLocalZDT);
+//        System.out.println("GMT->LocalDate: " + gmtToLocalZDT.toLocalDate());
+//        System.out.println("GMT->LocalTime: " + gmtToLocalZDT.toLocalTime());
 
         String date = String.valueOf(gmtToLocalZDT.toLocalDate());
         String time = String.valueOf(gmtToLocalZDT.toLocalTime());
         String dateTime = date + " " + time;
-        System.out.println(dateTime);
+//        System.out.println(dateTime);
     }
 }

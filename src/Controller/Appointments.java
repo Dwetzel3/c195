@@ -173,6 +173,13 @@ public class Appointments implements Initializable {
         overlap.showAndWait();
     }
 
+    public static void alertUpcoming() {
+        Alert overlap = new Alert(Alert.AlertType.WARNING);
+        overlap.setTitle("Appointment Soon!");
+        overlap.setContentText("There is an appointment soon.");
+        overlap.showAndWait();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -26,8 +26,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-import static Controller.Customers.addNewCustomer;
-import static Controller.Customers.getAllCustomers;
+import static Controller.Customers.*;
 
 public class AddCustomers implements Initializable {
 
@@ -200,6 +199,11 @@ public class AddCustomers implements Initializable {
         customerCount.close();
 
         String active = activeCB.getValue().toString();
+        if (!getSelectedCustomer().getActive()) {
+            activeCB.setValue(0);
+        } else {
+            activeCB.setValue(1);
+        }
         String customerId = String.valueOf(customerCounter + 1);
         String customerName = customerNameField.getText();
 //        if (activeCB.getValue() == 0) {
@@ -327,64 +331,6 @@ public class AddCustomers implements Initializable {
                 "'" + lastUpdate + "'," +
                 "'" + lastUpdateBy + "'" +
                 ");";
-//
-//        /**
-//         * Alter table
-//         */
-//
-//        String alterUser = "INSERT INTO user(userId, userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + userId + "'," +
-//                "'" + userName + "'," +
-//                "'" + password + "'," +
-//                "'" + active + "'," +
-//                "'" + createDate + "'," +
-//                "'" + createdBy + "'," +
-//                "'" + lastUpdate + "'," +
-//                "'" + lastUpdateBy + "');";
-//
-//        String alterCustomer = "INSERT INTO customer(customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + customerName + "'," +
-//                "'" + addressId + "'," +
-//                "'" + active + "'," +
-//                "'" + createDate + "'," +
-//                "'" + createdBy + "'," +
-//                "'" + lastUpdate + "'," +
-//                "'" + lastUpdateBy + "');";
-//
-//        String alterAddress = "INSERT INTO address(addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + addressId + "'," +
-//                "'" + address1 + "'," +
-//                "'" + addressTwo + "'," +
-//                "'" + cityId + "'," +
-//                "'" + postalAdd + "'," +
-//                "'" + phoneNumberAdd + "'," +
-//                "'" + createDate + "'," +
-//                "'" + createdBy + "'," +
-//                "'" + lastUpdate + "'," +
-//                "'" + lastUpdateBy + "');";
-//
-//        String alterCity = "INSERT INTO city(cityId, city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + cityId + "'," +
-//                "'" + cityName + "'," +
-//                "'" + countryId + "'," +
-//                "'" + createDate + "'," +
-//                "'" + createdBy + "'," +
-//                "'" + lastUpdate + "'," +
-//                "'" + lastUpdateBy + "');";
-//
-//        String alterCountry = "INSERT INTO country(countryId, country, createDate, createdBy, lastUpdate, lastUpdateBy)" +
-//                "VALUES(" +
-//                "'" + countryId + "'," +
-//                "'" + countryName + "'," +
-//                "'" + createDate + "'," +
-//                "'" + createdBy + "'," +
-//                "'" + lastUpdate + "'," +
-//                "'" + lastUpdateBy + "'" +
-//                ");";
 
         Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), Boolean.valueOf(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
         addNewCustomer(customer);
