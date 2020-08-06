@@ -8,8 +8,6 @@ import java.time.Month;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import static Controller.LogIn.lang;
-
 public interface AverageInterface {
 //    int value returning abstract method
 //    int calculateSquare(int n);

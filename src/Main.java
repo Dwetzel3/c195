@@ -45,7 +45,9 @@ public class Main extends Application {
         }
 
 
-// For each row of the result set ...
+/**
+ *         For each row of the result set
+  */
 
         while (true) {
             try {
@@ -72,9 +74,9 @@ public class Main extends Application {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Boolean active = null;
+            Integer active = null;
             try {
-                active = Boolean.valueOf(results.getString("active"));
+                active = Integer.valueOf(results.getString("active"));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -112,8 +114,9 @@ public class Main extends Application {
         }
 
 
-// For each row of the result set ...
-
+/**
+ * For each row of result set
+ */
         while (true) {
             try {
                 if (!appointmentResults.next()) break;
@@ -213,16 +216,11 @@ public class Main extends Application {
 
             Appointment appointment = new Appointment(appointmentId, customerID, userId, title, description, location, contact, type, url, start, end, appCreateDate, appCreatedBy, appLastUpdate, appLastUpdateBy);
             Appointments.addNewAppointment(appointment);
-            // Get the countryId from the current row using the column name - column countryId are in the VARCHAR format
-
-
         }
+
         AddAppointment.convertTime();
             launch(args);
             LogIn.closedConnection();
-//        ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
-
-//        ZoneId.getAvailableZoneIds().stream().filter(c -> c.contains("Europe")).forEach(System.out::println);
 
         LocalDate parisDate = LocalDate.of(2019, 10, 26);
         LocalTime timeParis = LocalTime.of(01, 00);
@@ -234,13 +232,6 @@ public class Main extends Application {
         Instant parisToGMTInstant = parisZDT.toInstant();
         ZonedDateTime parisToLocalZDT = parisZDT.withZoneSameInstant(localZoneId);
         ZonedDateTime gmtToLocalZDT = parisToGMTInstant.atZone(localZoneId);
-
-//        System.out.println("Local: " + ZonedDateTime.now());
-//        System.out.println("Paris: " + parisZDT);
-//        System.out.println("Paris->GMT: " + parisToGMTInstant);
-//        System.out.println("GMT->Local: " + gmtToLocalZDT);
-//        System.out.println("GMT->LocalDate: " + gmtToLocalZDT.toLocalDate());
-//        System.out.println("GMT->LocalTime: " + gmtToLocalZDT.toLocalTime());
 
         String date = String.valueOf(gmtToLocalZDT.toLocalDate());
         String time = String.valueOf(gmtToLocalZDT.toLocalTime());

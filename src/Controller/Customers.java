@@ -159,10 +159,11 @@ public class Customers implements Initializable {
         customersTable.setItems(getAllCustomers());
 
         /**
-         *  Setup PartTable
+         *  Setup Table
          */
 
         customersTable.getSelectionModel().select(getSelectedCustomer());
+
         customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         addressID.setCellValueFactory(new PropertyValueFactory<>("addressID"));

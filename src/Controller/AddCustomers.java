@@ -1,7 +1,6 @@
 package Controller;
 
 import DBConnection.DBQuery;
-import Model.Country;
 import Model.Customer;
 import Model.User;
 import javafx.collections.FXCollections;
@@ -18,7 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,7 +56,7 @@ public class AddCustomers implements Initializable {
     private TableColumn<Customer, String> lastUpdatedByCol;
 
     @FXML
-    private ChoiceBox<Integer> activeCB;
+    private ChoiceBox<Boolean> activeCB;
 
     @FXML
     private TextField customerNameField;
@@ -198,17 +196,16 @@ public class AddCustomers implements Initializable {
         System.out.println("Customer has " + customerCounter + " row(s).");
         customerCount.close();
 
-        String active = activeCB.getValue().toString();
-        if (!getSelectedCustomer().getActive()) {
-            activeCB.setValue(0);
-        } else {
-            activeCB.setValue(1);
+        Integer newActive = null;
+        if (activeCB.getValue() == false) {
+            newActive = 0;
+        } else if (activeCB.getValue() == true) {
+            newActive = 1;
         }
-        String customerId = String.valueOf(customerCounter + 1);
+        String active = newActive.toString();
+
+        String customerId = String.valueOf(getAllCustomers().get(customerCounter - 1).getCustomerID() + 1);
         String customerName = customerNameField.getText();
-//        if (activeCB.getValue() == 0) {
-//            active = "false";
-//        }
         String createDate = String.valueOf(new Date(System.currentTimeMillis()));
         String createdBy = LogIn.getUsername();
         String lastUpdate = String.valueOf(new Timestamp(System.currentTimeMillis()));
@@ -332,7 +329,7 @@ public class AddCustomers implements Initializable {
                 "'" + lastUpdateBy + "'" +
                 ");";
 
-        Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), Boolean.valueOf(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+        Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), newActive, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
         addNewCustomer(customer);
 
         if (newUser) {
@@ -375,7 +372,7 @@ public class AddCustomers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList choiceBox = FXCollections.observableArrayList();
-        choiceBox.addAll(0, 1);
+        choiceBox.addAll(false, true);
         activeCB.setItems(choiceBox);
 
         customersTable.getSortOrder().setAll();

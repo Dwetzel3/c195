@@ -120,6 +120,7 @@ public class AddAppointment implements Initializable {
         /**
          * Gets appointmentId Count
          */
+
         int appointmentCounter = 0;
         ResultSet appointmentCount = statement.executeQuery("SELECT *" +
                 " FROM appointment;");
@@ -139,7 +140,7 @@ public class AddAppointment implements Initializable {
         }
         int startOffset = (Integer.valueOf(startTime.getValue().substring(0,2)) - AddAppointment.offset);
         int endOffset = (Integer.valueOf(endTime.getValue().substring(0,2)) - AddAppointment.offset);
-        String appointmentId = String.valueOf(appointmentCounter + 1);
+        String appointmentId = String.valueOf(Appointments.getAllAppointments().get(appointmentCounter - 1).getAppointmentId() + 1);
         String customerId = String.valueOf(CustomerIdField.getText());
 
         String userId = null;
@@ -200,6 +201,20 @@ public class AddAppointment implements Initializable {
                 || selectedEndTime < 9 || selectedEndTime > 17) {
             valid = false;
             Appointments.alertHours();
+        }
+
+        /**
+         * Checks if the appointment would cause an overlapping conflict
+         */
+
+        for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
+            if (Appointments.getAllAppointments().get(i).getStart().substring(0, 10).equals(assignedDate.getValue().toString())
+                    && (Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).equals(Timestamp.valueOf(start))
+                || Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).after(Timestamp.valueOf(start)) && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getEnd()).before(Timestamp.valueOf(end)))
+                || Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(start)) && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).after(Timestamp.valueOf(end))) {
+                valid = false;
+                Appointments.alertOverlap();
+            }
         }
 
         if (valid) {

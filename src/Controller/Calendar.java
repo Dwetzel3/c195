@@ -1676,10 +1676,11 @@ public class Calendar implements Initializable {
 
         for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
             System.out.println(Appointments.getAllAppointments().get(i).getStart());
+            System.out.println(Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()));
             if ((Appointments.getAllAppointments().get(i).getStart().substring(0, 10)).equals(LocalDate.now().toString())
                     && (Appointments.getAllAppointments().get(i).getStart() != null)
-                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).after(Timestamp.valueOf(LocalDateTime.now().minusMinutes(15)))
-                    && Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).before(Timestamp.valueOf(LocalDateTime.now().minusMinutes(1))))
+                    && (Timestamp.valueOf(LocalDateTime.now())).after(Timestamp.valueOf(Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).toLocalDateTime().minusMinutes(15)))
+                    && (Timestamp.valueOf(LocalDateTime.now())).before(Timestamp.valueOf(Timestamp.valueOf(Appointments.getAllAppointments().get(i).getStart()).toLocalDateTime())))
                 {
                     Appointments.alertUpcoming();
                 }

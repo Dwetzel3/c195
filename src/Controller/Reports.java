@@ -87,6 +87,15 @@ public class Reports  implements Initializable {
         while(uniqueTypes.hasNext()){
             System.out.println(uniqueTypes.next());
         }
+
+        /**
+         * Alerts the size of the appointmentTypes array
+         */
+        if (appointmentTypes.size() > 0) {
+            Alert appointmentTypesSize = new Alert(Alert.AlertType.WARNING);
+            appointmentTypesSize.setContentText(String.valueOf(al) + "\n# of appointment types: " + appointmentTypes.size());
+            appointmentTypesSize.showAndWait();
+        }
     }
 
     public void schedule(ActionEvent actionEvent) {

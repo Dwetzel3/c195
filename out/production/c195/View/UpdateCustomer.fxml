@@ -59,20 +59,16 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
-      <VBox prefHeight="447.0" prefWidth="290.0" spacing="20.0">
+      <VBox prefHeight="380.0" prefWidth="290.0" spacing="20.0">
          <children>
-            <HBox prefHeight="50.0" prefWidth="250.0" spacing="20.0">
+            <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <HBox prefHeight="38.0" prefWidth="116.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="144.0" text="Customer ID:">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <TextField fx:id="customerIdField" blendMode="DARKEN" editable="false" prefHeight="25.0" prefWidth="136.0" />
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Customer ID:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="customerIdField" alignment="TOP_LEFT" editable="false" prefHeight="25.0" prefWidth="127.0" />
                </children>
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
@@ -87,12 +83,62 @@
             </HBox>
             <HBox prefHeight="42.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Address ID:">
+                  <Label fx:id="address1" prefHeight="27.0" prefWidth="126.0" text="Address:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="addressIdField" prefHeight="25.0" prefWidth="125.0" />
+                  <TextField fx:id="address" prefHeight="25.0" prefWidth="125.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Address 2:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="address2" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="City:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="city" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Country:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="country" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label fx:id="postalCode" prefHeight="27.0" prefWidth="126.0" text="Postal Code:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="postal" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="126.0" text="Phone Number:">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneNumber" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="127.0" />
                </children>
             </HBox>
             <HBox prefHeight="46.0" prefWidth="250.0">
@@ -103,46 +149,6 @@
                      </font>
                   </Label>
                   <ChoiceBox fx:id="activeCB" prefHeight="25.0" prefWidth="124.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="52.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Created Date:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="createdDateField" editable="false" prefHeight="25.0" prefWidth="128.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Created By:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="createdByField" editable="false" prefHeight="25.0" prefWidth="128.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="52.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Last Update:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="lastUpdateField" editable="false" prefHeight="25.0" prefWidth="128.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="52.0" prefWidth="250.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Last Updated By:">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="lastUpdatedByField" editable="false" prefHeight="25.0" prefWidth="128.0" />
                </children>
             </HBox>
          </children>

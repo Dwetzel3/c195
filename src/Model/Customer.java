@@ -14,13 +14,13 @@ public class Customer {
     private int customerID;
     private String customerName;
     private int addressID;
-    private Boolean active;
+    private Integer active;
     private Date createdDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdatedBy;
 
-    public Customer(Integer customerId, String customerName, Integer addressID, Boolean active, java.sql.Date createdDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
+    public Customer(Integer customerId, String customerName, Integer addressID, Integer active, java.sql.Date createdDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy) {
         this.customerID = customerId;
         this.customerName = customerName;
         this.addressID = addressID;
@@ -62,11 +62,11 @@ public class Customer {
         this.addressID = addressId;
     }
 
-    public Boolean getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 

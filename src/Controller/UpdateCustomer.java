@@ -197,7 +197,7 @@ public class UpdateCustomer implements Initializable {
          */
 
         if (valid) {
-            Customer customer = new Customer(Integer.valueOf(customerID), customerName, Integer.valueOf(addressId), Boolean.parseBoolean(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+            Customer customer = new Customer(Integer.valueOf(customerID), customerName, Integer.valueOf(addressId), Integer.valueOf(active), Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
             int thisIndex = Customers.getAllCustomers().indexOf(getSelectedCustomer());
             Customers.updateCustomer(thisIndex, customer);
 
@@ -322,7 +322,7 @@ public class UpdateCustomer implements Initializable {
 //        customerIdField.setText(String.valueOf(Customers.getSelectedCustomer().getCustomerID()));
 //        customerNameField.setText(getSelectedCustomer().getCustomerName());
 //        addressIdField.setText(String.valueOf(getSelectedCustomer().getAddressID()));
-        if (!getSelectedCustomer().getActive()) {
+        if (getSelectedCustomer().getActive() == 0) {
             activeCB.setValue(false);
         } else {
             activeCB.setValue(true);

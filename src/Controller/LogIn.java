@@ -50,7 +50,6 @@ public class LogIn implements Initializable {
     public static Connection conn;
 
     static Locale locale = Locale.getDefault();
-    static String lang = locale.getDisplayLanguage();
 
     public static String getUsername() {
         return username;
@@ -70,7 +69,7 @@ public class LogIn implements Initializable {
         try {
             Class.forName(MYSQLJDBCDriver);
             conn = DriverManager.getConnection(jdbcURL, userField.getText(), passwordField.getText());
-            if (lang.equals("español")) {
+            if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
                 System.out.println("\n" + "Conectado a la base de datos.");
                 try(FileWriter fw = new FileWriter("Log.txt", true);
                     BufferedWriter bw = new BufferedWriter(fw);
@@ -78,7 +77,7 @@ public class LogIn implements Initializable {
                     out.println(username + " logged in at " + Timestamp.valueOf(LocalDateTime.now()));
                 } catch (IOException e) {
                 }
-            } else if (lang.equals("English")) {
+            } else if (locale.getLanguage().equals(new Locale("en").getLanguage())) {
                 System.out.println("Connected to the database.");
 
                 try(FileWriter fw = new FileWriter("Log.txt", true);
@@ -111,15 +110,16 @@ public class LogIn implements Initializable {
             System.getProperty("user.country");
             conn.close();
 
-            if (lang.equals("español")) {
+            if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
                 System.out.println("Desconectado de la base de datos.");
-            } else if (lang.equals("English")) {
+            } else if (locale.getLanguage().equals(new Locale("en").getLanguage())) {
                 System.out.println("Disconnected from the database.");
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
         }
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
