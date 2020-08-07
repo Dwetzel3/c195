@@ -96,7 +96,8 @@ public class Customers implements Initializable {
 
     public void goToAppointments(ActionEvent event) throws IOException {
         for (int i = 0; i < Appointments.getAllAppointments().size(); i++) {
-            if (customersTable.getSelectionModel().getSelectedItem().getCustomerID() == Appointments.getAllAppointments().get(i).getCustomerID()) {
+            if (customersTable.getSelectionModel().getSelectedItem().getCustomerID() != null &&
+                    customersTable.getSelectionModel().getSelectedItem().getCustomerID() == Appointments.getAllAppointments().get(i).getCustomerID()) {
                     Appointments.setSelectedAppointment(Appointments.getAllAppointments().get(i));
                 break;
             }

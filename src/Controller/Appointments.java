@@ -160,24 +160,24 @@ public class Appointments implements Initializable {
     }
 
     public static void alertEmpty() {
-        Alert overlap = new Alert(Alert.AlertType.WARNING);
-        overlap.setTitle("Incomplete Data");
-        overlap.setContentText("Please check all forms for empty data.");
-        overlap.showAndWait();
+        Alert alertEmpty = new Alert(Alert.AlertType.WARNING);
+        alertEmpty.setTitle("Incomplete Data");
+        alertEmpty.setContentText("Please check all forms for empty data.");
+        alertEmpty.showAndWait();
     }
 
     public static void alertType() {
-        Alert overlap = new Alert(Alert.AlertType.WARNING);
-        overlap.setTitle("Non-Conforming Data");
-        overlap.setContentText("Please check all forms for incompatible data types.");
-        overlap.showAndWait();
+        Alert alertType = new Alert(Alert.AlertType.WARNING);
+        alertType.setTitle("Non-Conforming Data");
+        alertType.setContentText("Please check all forms for incompatible data types.");
+        alertType.showAndWait();
     }
 
     public static void alertUpcoming() {
-        Alert overlap = new Alert(Alert.AlertType.WARNING);
-        overlap.setTitle("Appointment Soon!");
-        overlap.setContentText("There is an appointment soon.");
-        overlap.showAndWait();
+        Alert upcoming = new Alert(Alert.AlertType.WARNING);
+        upcoming.setTitle("Appointment Soon!");
+        upcoming.setContentText("There is an appointment soon.");
+        upcoming.showAndWait();
     }
 
     @Override

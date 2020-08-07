@@ -189,7 +189,10 @@ public class UpdateCustomer implements Initializable {
 //            Integer.parseInt(phoneNumber);
         } catch (NumberFormatException e) {
             valid = false;
-            Appointments.alertType();
+            Alert alertType = new Alert(Alert.AlertType.WARNING);
+            alertType.setTitle("Non-Conforming Data");
+            alertType.setContentText("Please check all forms for incompatible data types.");
+            alertType.showAndWait();
         }
 
         /**

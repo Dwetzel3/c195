@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -114,6 +111,7 @@ public class AddCustomers implements Initializable {
     }
 
     public void saveCustomer(ActionEvent event) throws IOException, SQLException {
+        boolean valid = true;
         Boolean newCountry = true;
         Boolean newCity = true;
         Boolean newAddress = true;
@@ -329,23 +327,59 @@ public class AddCustomers implements Initializable {
                 "'" + lastUpdateBy + "'" +
                 ");";
 
-        Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), newActive, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
-        addNewCustomer(customer);
+        /**
+         * Checks if forms are completed
+         */
 
-        if (newUser) {
-            statement.execute(insertUser);
+        if (customerNameField == null ||
+        address.getText().isEmpty() ||
+        address2.getText().isEmpty() ||
+        city.getText().isEmpty() ||
+        country.getText().isEmpty() ||
+        postal.getText().isEmpty() ||
+        phoneNumber.getText().isEmpty() ||
+        activeCB.getValue() == null) {
+            Alert nullFields = new Alert(Alert.AlertType.WARNING);
+            nullFields.setTitle("Incomplete Data");
+            nullFields.setContentText("Please check all forms for missing data.");
+            nullFields.showAndWait();
+            valid = false;
         }
-        if (newCountry) {
-            statement.execute(insertCountry);
+
+        /**
+         * Checks for non-conforming data
+         */
+
+        try {
+            Integer.parseInt(phoneNumber.getText());
+            Integer.parseInt(postal.getText());
+        } catch (NumberFormatException e) {
+            valid = false;
+            Appointments.alertType();
         }
-        if (newCity) {
-            statement.execute(insertCity);
-        }
-        if (newAddress) {
-            statement.execute(insertAddress);
-        }
-        if (newCustomer) {
-            statement.execute(insertCustomer);
+
+
+
+
+        if (valid) {
+            Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), newActive, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
+            addNewCustomer(customer);
+
+            if (newUser) {
+                statement.execute(insertUser);
+            }
+            if (newCountry) {
+                statement.execute(insertCountry);
+            }
+            if (newCity) {
+                statement.execute(insertCity);
+            }
+            if (newAddress) {
+                statement.execute(insertAddress);
+            }
+            if (newCustomer) {
+                statement.execute(insertCustomer);
+            }
         }
 
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
