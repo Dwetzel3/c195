@@ -185,8 +185,8 @@ public class UpdateCustomer implements Initializable {
          */
 
         try {
-//            Integer.parseInt(addressId);
-//            Integer.parseInt(phoneNumber);
+            Integer.parseInt(postal.getText());
+            Integer.parseInt(phoneNumber.getText());
         } catch (NumberFormatException e) {
             valid = false;
             Alert alertType = new Alert(Alert.AlertType.WARNING);
@@ -212,8 +212,6 @@ public class UpdateCustomer implements Initializable {
 
             statement.execute(UpdateCustomer);
 
-
-        }
             Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
             Scene projectScene = new Scene(projectParent);
 
@@ -222,6 +220,7 @@ public class UpdateCustomer implements Initializable {
             window.setScene(projectScene);
             window.setTitle("Customers");
             window.show();
+        }
     }
 
     /** lambda example

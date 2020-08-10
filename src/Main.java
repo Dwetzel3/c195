@@ -10,9 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.sql.*;
 import java.time.*;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class Main extends Application {
@@ -20,7 +22,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
-        primaryStage.setTitle("Log In");
+        if (LogIn.locale.getLanguage().equals(new Locale("es").getLanguage())) {
+            primaryStage.setTitle("Iniciar sesión");
+        } else if (LogIn.locale.getLanguage().equals(new Locale("en").getLanguage())) {
+            primaryStage.setTitle("Log In");
+        }
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }

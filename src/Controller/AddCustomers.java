@@ -358,9 +358,6 @@ public class AddCustomers implements Initializable {
             Appointments.alertType();
         }
 
-
-
-
         if (valid) {
             Customer customer = new Customer(Integer.parseInt(customerId), customerName, Integer.valueOf(addressId), newActive, Date.valueOf(createDate), createdBy, Timestamp.valueOf(lastUpdate), lastUpdateBy);
             addNewCustomer(customer);
@@ -380,16 +377,16 @@ public class AddCustomers implements Initializable {
             if (newCustomer) {
                 statement.execute(insertCustomer);
             }
+
+            Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
+            Scene projectScene = new Scene(projectParent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(projectScene);
+            window.setTitle("Customers");
+            window.show();
         }
-
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Customers.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Customers");
-        window.show();
     }
 
     public void goToCustomer(ActionEvent event) throws IOException {

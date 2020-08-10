@@ -176,10 +176,9 @@ public class UpdateAppointment implements Initializable {
                     && Appointments.getAllAppointments().get(i).getAppointmentId() != getSelectedAppointment().getAppointmentId()) {
                 if (startTime < Integer.parseInt(Appointments.getAllAppointments().get(i).getEnd().substring(11, 13))
                         && endTime > Integer.parseInt(Appointments.getAllAppointments().get(i).getStart().substring(11, 13))) {
-                    System.out.println(Integer.parseInt(Appointments.getAllAppointments().get(i).getStart().substring(11, 13)));
-                    System.out.println(Integer.parseInt(Appointments.getAllAppointments().get(i).getEnd().substring(11, 13)));
                     valid = false;
                     Appointments.alertOverlap();
+                    break;
                 }
             }
         }
@@ -228,17 +227,16 @@ public class UpdateAppointment implements Initializable {
             int thisIndex = Appointments.getAllAppointments().indexOf(getSelectedAppointment());
             Appointments.updateAppointment(thisIndex, appointment);
             statement.execute(alterStatement);
+
+            Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
+            Scene projectScene = new Scene(projectParent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(projectScene);
+            window.setTitle("Appointments");
+            window.show();
         }
-
-
-        Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
-        Scene projectScene = new Scene(projectParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(projectScene);
-        window.setTitle("Appointments");
-        window.show();
     }
 
     @Override
