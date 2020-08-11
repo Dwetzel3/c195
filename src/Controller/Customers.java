@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +23,7 @@ import sun.rmi.runtime.Log;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Customers implements Initializable {
@@ -64,6 +67,25 @@ public class Customers implements Initializable {
     private TableColumn<Customer, String> lastUpdatedBy;
 
     static Statement statement = DBQuery.getStatement();
+
+    @FXML
+    private Label customerHeader;
+
+    @FXML
+    private Button goToAppointments;
+
+    @FXML
+    private Button addCustomerBtn;
+
+    @FXML
+    private Button updateCustomerBtn;
+
+    @FXML
+    private Button deleteBtn;
+
+    @FXML
+    private Button exitBtn;
+
 
     public static void updateCustomer(int thisIndex, Customer customer) {
         allCustomers.set(thisIndex, customer);
@@ -146,6 +168,16 @@ public class Customers implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ResourceBundle rb = ResourceBundle.getBundle("languages/Nat", Locale.getDefault());
+
+        if (Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("en")) {
+            customerHeader.setText(rb.getString("customers"));
+            addCustomerBtn.setText(rb.getString("add"));
+            updateCustomerBtn.setText(rb.getString("update"));
+            deleteBtn.setText(rb.getString("delete"));
+            exitBtn.setText(rb.getString("exitBtn"));
+            goToAppointments.setText(rb.getString("goToAppointments"));
+        }
 
         /**
          * sort TableViews

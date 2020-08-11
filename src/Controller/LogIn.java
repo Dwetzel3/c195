@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import sun.applet.Main;
 import sun.rmi.runtime.Log;
 import sun.security.mscapi.CPublicKey;
 
@@ -28,6 +29,10 @@ import java.util.ResourceBundle;
 
 
 public class LogIn implements Initializable {
+
+    Locale userLocale;
+    ResourceBundle rb;
+
     @FXML
     private TextField userField;
 
@@ -60,6 +65,10 @@ public class LogIn implements Initializable {
 
     public static Locale locale = Locale.getDefault();
 
+    public static Locale getLocale() {
+        return Locale.getDefault();
+    }
+
     public static String getUsername() {
         return username;
     }
@@ -91,24 +100,13 @@ public class LogIn implements Initializable {
         try {
             Class.forName(MYSQLJDBCDriver);
             conn = DriverManager.getConnection(jdbcURL, userField.getText(), passwordField.getText());
-            if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
-                alertConnectedEs();
                 try(FileWriter fw = new FileWriter("Log.txt", true);
                     BufferedWriter bw = new BufferedWriter(fw);
                     PrintWriter out = new PrintWriter(bw)) {
                     out.println(username + " logged in at " + Timestamp.valueOf(LocalDateTime.now()));
                 } catch (IOException e) {
                 }
-            } else if (locale.getLanguage().equals(new Locale("en").getLanguage())) {
-                System.out.println("Connected to the database.");
-                alertConnected();
-                try(FileWriter fw = new FileWriter("Log.txt", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw)) {
-                    out.println(username + " logged in at " + Timestamp.valueOf(LocalDateTime.now()));
-                } catch (IOException e) {
-                }
-            }
+
             User.setUsername(username);
             User.setPassword(password);
             Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Calendar.fxml"));
@@ -127,9 +125,9 @@ public class LogIn implements Initializable {
         } catch (SQLException e) {
             Alert alertType = new Alert(Alert.AlertType.ERROR);
             alertType.setTitle("Error");
-            if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
+            if (getLocale().toString().equals("es_MX")) {
                 alertType.setContentText("Error: el nombre de usuario y la contraseña no coinciden.");
-            } else if (locale.getLanguage().equals(new Locale("en").getLanguage())) {
+            } else if (getLocale().toString().equals("en_US")) {
                 alertType.setContentText("Error: The username and password did not match.");
             }
             alertType.showAndWait();
@@ -155,10 +153,20 @@ public class LogIn implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
-            logInButton.setText("Iniciar sesión");
-            userNameLbl.setText("Nombre de usuario");
-            passwordLbl.setText("Contraseña");
+        ResourceBundle rb = ResourceBundle.getBundle("languages/Nat", Locale.getDefault());
+
+        if (Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("en")) {
+            userNameLbl.setText(rb.getString("username"));
+            passwordLbl.setText(rb.getString("password"));
+            logInButton.setText(rb.getString("login"));
         }
+
+
+
+//        if (locale.getLanguage().equals(new Locale("es").getLanguage())) {
+//            logInButton.setText("Iniciar sesión");
+//            userNameLbl.setText("Nombre de usuario");
+//            passwordLbl.setText("Contraseña");
+//        }
     }
 }

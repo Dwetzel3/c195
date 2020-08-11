@@ -16,7 +16,7 @@
    <children>
       <VBox alignment="CENTER" layoutX="271.0" prefHeight="447.0" prefWidth="690.0">
          <children>
-            <Label text="Add Customers">
+            <Label fx:id="addCustomers" text="Add Customers">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -63,7 +63,7 @@
          <children>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Customer Name:">
+                  <Label fx:id="customerName" prefHeight="27.0" prefWidth="126.0" text="Customer Name:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -83,7 +83,7 @@
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Address 2:">
+                  <Label fx:id="address2Lbl" prefHeight="27.0" prefWidth="126.0" text="Address 2:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -93,7 +93,7 @@
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="City:">
+                  <Label fx:id="cityLbl" prefHeight="27.0" prefWidth="126.0" text="City:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -103,7 +103,7 @@
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Country:">
+                  <Label fx:id="countrylbl" prefHeight="27.0" prefWidth="126.0" text="Country:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -113,7 +113,7 @@
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label fx:id="postalCode" prefHeight="27.0" prefWidth="126.0" text="Postal Code:">
+                  <Label fx:id="postalCodelbl" prefHeight="27.0" prefWidth="126.0" text="Postal Code:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -123,7 +123,7 @@
             </HBox>
             <HBox prefHeight="52.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Phone Number:">
+                  <Label fx:id="phonelbl" prefHeight="27.0" prefWidth="126.0" text="Phone Number:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -133,7 +133,7 @@
             </HBox>
             <HBox prefHeight="46.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="126.0" text="Active:">
+                  <Label fx:id="activelbl" prefHeight="27.0" prefWidth="126.0" text="Active:">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>

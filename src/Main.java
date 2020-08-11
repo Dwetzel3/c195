@@ -15,12 +15,14 @@ import sun.rmi.runtime.Log;
 import java.sql.*;
 import java.time.*;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("/View/LogIn.fxml"));
         if (LogIn.locale.getLanguage().equals(new Locale("es").getLanguage())) {
             primaryStage.setTitle("Iniciar sesión");
@@ -34,6 +36,7 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
 
         Connection conn = LogIn.conn;
+
         try {
             DBQuery.setStatement(conn);
         } catch (SQLException e) {

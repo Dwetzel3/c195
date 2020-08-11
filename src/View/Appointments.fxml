@@ -14,7 +14,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="447.0" prefWidth="800.0">
          <children>
-            <Label text="Appointments">
+            <Label fx:id="AppointmentsLbl" text="Appointments">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

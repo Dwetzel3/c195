@@ -21,6 +21,7 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -57,7 +58,6 @@ public class AddAppointment implements Initializable {
     @FXML
     private TableColumn<Appointment, String> LastUpdatedByCol;
 
-
     @FXML
     private TextField UserIdField;
 
@@ -90,6 +90,53 @@ public class AddAppointment implements Initializable {
 
     @FXML
     private DatePicker assignedDate;
+
+
+    @FXML
+    private Label DateLbl;
+
+    @FXML
+    private Label addAppointmentLbl;
+
+    @FXML
+    private Label StartLbl;
+
+    @FXML
+    private Label EndLbl;
+
+    @FXML
+    private Button SaveBtn;
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
+    private Label customerIdLbl;
+
+    @FXML
+    private Label UserIdLbl;
+
+    @FXML
+    private Label TitleLbl;
+
+    @FXML
+    private Label DescriptionLbl;
+
+    @FXML
+    private HBox createdDateField;
+
+    @FXML
+    private Label LocationLbl;
+
+    @FXML
+    private Label ContactLbl;
+
+    @FXML
+    private Label TypeLbl;
+
+    @FXML
+    private Label URLLbl;
+
 
     public void goToAppointments(ActionEvent event) throws IOException {
         Parent projectParent = FXMLLoader.load(getClass().getResource("../View/Appointments.fxml"));
@@ -240,6 +287,25 @@ public class AddAppointment implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ResourceBundle rb = ResourceBundle.getBundle("languages/Nat", Locale.getDefault());
+
+        if (Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("en")) {
+            customerIdLbl.setText(rb.getString("customerId"));
+            UserIdLbl.setText(rb.getString("userId"));
+            TitleLbl.setText(rb.getString("title"));
+            DescriptionLbl.setText(rb.getString("description"));
+            LocationLbl.setText(rb.getString("location"));
+            ContactLbl.setText(rb.getString("contact"));
+            TypeLbl.setText(rb.getString("type"));
+            URLLbl.setText(rb.getString("url"));
+            DateLbl.setText(rb.getString("date"));
+            StartLbl.setText(rb.getString("start"));
+            EndLbl.setText(rb.getString("end"));
+            SaveBtn.setText(rb.getString("saveBtn"));
+            exitBtn.setText(rb.getString("exitBtn"));
+            addAppointmentLbl.setText(rb.getString("addAppointment"));
+        }
+
         ObservableList startChoiceBox = FXCollections.observableArrayList();
         startChoiceBox.addAll("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00");
         startTime.setItems(startChoiceBox);

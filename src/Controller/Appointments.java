@@ -11,9 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -23,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.*;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
@@ -70,6 +69,26 @@ public class Appointments implements Initializable {
 
     @FXML
     private TableColumn<Appointment, String> UpdatedByCol;
+
+
+    @FXML
+    private Label AppointmentsLbl;
+
+    @FXML
+    private Button goToCustomer;
+
+    @FXML
+    private Button AddAppointment;
+
+    @FXML
+    private Button UpdateAppointment;
+
+    @FXML
+    private Button DeleteAppointment;
+
+    @FXML
+    private Button exitBtn1;
+
 
 
     public static void updateAppointment(int index, Appointment appointment) {
@@ -182,6 +201,16 @@ public class Appointments implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ResourceBundle rb = ResourceBundle.getBundle("languages/Nat", Locale.getDefault());
+
+        if (Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("en")) {
+            AppointmentsLbl.setText(rb.getString("appointment"));
+            AddAppointment.setText(rb.getString("add"));
+            UpdateAppointment.setText(rb.getString("update"));
+            DeleteAppointment.setText(rb.getString("delete"));
+            exitBtn1.setText(rb.getString("exitBtn"));
+            goToCustomer.setText(rb.getString("goToCustomer"));
+        }
 
         AppointmentsTable.getSortOrder().setAll();
         //set up initial values in table

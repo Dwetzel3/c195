@@ -169,12 +169,14 @@ public class UpdateCustomer implements Initializable {
          * Checks to see that data is completely entered
          */
 
-        if (customerName.isEmpty() ||
-        active.isEmpty() ||
-        createDate.isEmpty() ||
-        createdBy.isEmpty() ||
-        lastUpdate.isEmpty() ||
-        lastUpdateBy.isEmpty()) {
+        if (    customerIdField.getText().isEmpty() ||
+                customerNameField.getText().isEmpty() ||
+                address.getText().isEmpty() ||
+                address2.getText().isEmpty() || city.getText().isEmpty() ||
+                country.getText().isEmpty() ||
+                postal.getText().isEmpty() ||
+                phoneNumber.getText().isEmpty() ||
+                activeCB.getValue() == null) {
             valid = false;
             Appointments.alertEmpty();
         }

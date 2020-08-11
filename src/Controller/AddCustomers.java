@@ -65,6 +65,9 @@ public class AddCustomers implements Initializable {
     private TextField address2;
 
     @FXML
+    private Label address2Lbl;
+
+    @FXML
     private TextField city;
 
     @FXML
@@ -75,6 +78,31 @@ public class AddCustomers implements Initializable {
 
     @FXML
     private TextField phoneNumber;
+
+    @FXML
+    private Label addCustomers;
+
+    @FXML
+    private Button addCustomer;
+
+    @FXML
+    private Button exitBtn;
+
+    @FXML
+    private Label customerName;
+
+    @FXML
+    private Label address1;
+
+    @FXML
+    private Label postalCode;
+
+    @FXML
+    private Label phone;
+
+    @FXML
+    private Label active;
+
 
     Statement statement = DBQuery.getStatement();
 
