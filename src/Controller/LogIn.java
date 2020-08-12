@@ -34,6 +34,9 @@ public class LogIn implements Initializable {
     ResourceBundle rb;
 
     @FXML
+    private Label invalidCreds;
+
+    @FXML
     private TextField userField;
 
     @FXML
@@ -64,6 +67,8 @@ public class LogIn implements Initializable {
     public static Connection conn;
 
     public static Locale locale = Locale.getDefault();
+
+    String connected = "";
 
     public static Locale getLocale() {
         return Locale.getDefault();
@@ -123,14 +128,19 @@ public class LogIn implements Initializable {
             alertType.setContentText("Error: " + e.getLocalizedMessage());
             alertType.showAndWait();
         } catch (SQLException e) {
-            Alert alertType = new Alert(Alert.AlertType.ERROR);
-            alertType.setTitle("Error");
-            if (getLocale().toString().equals("es_MX")) {
-                alertType.setContentText("Error: el nombre de usuario y la contraseña no coinciden.");
-            } else if (getLocale().toString().equals("en_US")) {
-                alertType.setContentText("Error: The username and password did not match.");
+            ResourceBundle rb = ResourceBundle.getBundle("languages/Nat", Locale.getDefault());
+
+            if (Locale.getDefault().getLanguage().equals("es") || Locale.getDefault().getLanguage().equals("en")) {
+                invalidCreds.setText(rb.getString("invalid"));
             }
-            alertType.showAndWait();
+//            Alert alertType = new Alert(Alert.AlertType.ERROR);
+//            alertType.setTitle("Error");
+//            if (getLocale().toString().equals("es_MX")) {
+//                alertType.setContentText("Error: el nombre de usuario y la contraseña no coinciden.");
+//            } else if (getLocale().toString().equals("en_US")) {
+//                alertType.setContentText("Error: The username and password did not match.");
+//            }
+//            alertType.showAndWait();
         }
         return conn;
     }
@@ -159,6 +169,7 @@ public class LogIn implements Initializable {
             userNameLbl.setText(rb.getString("username"));
             passwordLbl.setText(rb.getString("password"));
             logInButton.setText(rb.getString("login"));
+
         }
 
 
